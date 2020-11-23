@@ -1,16 +1,18 @@
-import './App.css';
-import { Navbar, Nav } from 'react-bootstrap';
-import { Route, Switch } from 'react-router-dom';
-import { LinkContainer } from 'react-router-bootstrap';
+import './App.css'
+import { Nav, Navbar } from 'react-bootstrap'
+import { Route, Switch } from 'react-router-dom'
+import { LinkContainer } from 'react-router-bootstrap'
+import Dashboard from './Dashboard'
+import Visualize from './Visualize'
 
-export default function App() {
+export default function App () {
   return (
     <div>
       <Navbar bg="light" expand="lg">
         <LinkContainer to="/">
           <Navbar.Brand>COVID Travel Analysis Application</Navbar.Brand>
         </LinkContainer>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle aria-controls="basic-navbar-nav"/>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <LinkContainer to="/dashboard">
@@ -21,32 +23,24 @@ export default function App() {
             </LinkContainer>
           </Nav>
         </Navbar.Collapse>
-    </Navbar>
+      </Navbar>
 
       <Switch>
         <Route path="/dashboard">
-          <Dashboard />
+          <Dashboard/>
         </Route>
         <Route path="/query">
-          <Query />
+          <Visualize/>
         </Route>
         <Route path="/">
-          <Home />
+          <Home/>
         </Route>
       </Switch>
     </div>
 
-  );
+  )
 }
 
-function Home() {
-  return <h2>Home</h2>;
-}
-
-function Dashboard() {
-  return <h2>Dashboard</h2>;
-}
-
-function Query() {
-  return <h2>Query</h2>;
+function Home () {
+  return <h2>Home</h2>
 }
