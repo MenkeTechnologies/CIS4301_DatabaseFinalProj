@@ -1,3 +1,7 @@
-export const restrictionType = 'top100Films1'
-export const stateType = 'top100Films2'
-export const regionType = 'top100Films3'
+import React from 'react'
+
+export const restrictionType = 'restriction'
+export const stateType = 'state'
+export const regionType = 'region'
+
+export const ANY = 'ANY'

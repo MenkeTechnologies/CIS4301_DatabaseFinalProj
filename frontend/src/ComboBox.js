@@ -4,16 +4,20 @@ import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import { regionType, stateType } from './Utils'
 
+import usaStates from './data/states.js'
+import restrictions from './data/restriction'
+import regionNames from './data/regions'
+
 export default function ComboBox (props) {
 
-  let opts;
+  let opts
 
   if (props.type === stateType) {
-    opts = top100Films1
+    opts = Object.keys(usaStates)
   } else if (props.type === regionType) {
-    opts = top100Films2
+    opts = regionNames
   } else {
-    opts = top100Films3
+    opts = restrictions
   }
 
   return (
@@ -29,22 +33,3 @@ export default function ComboBox (props) {
     />
   )
 }
-
-// Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
-const top100Films1 = [
-  'Snatch1',
-  '3 Idiots',
-  'Monty Python and the Holy Grail'
-]
-
-const top100Films2 = [
-  'Snatch2',
-  '3 Idiots',
-  'Monty Python and the Holy Grail'
-]
-
-const top100Films3 = [
-  'Snatch3',
-  '3 Idiots',
-  'Monty Python and the Holy Grail'
-]

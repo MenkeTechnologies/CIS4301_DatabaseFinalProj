@@ -1,8 +1,9 @@
 import React from 'react'
-import { Field, Form } from 'react-final-form'
+import { Form } from 'react-final-form'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { Checkbox } from 'final-form-material-ui'
+import Checkbox from '@material-ui/core/Checkbox'
+
 import {
   Button,
   CssBaseline,
@@ -15,58 +16,57 @@ import {
   Typography,
 } from '@material-ui/core'
 // Picker
-import { DatePicker, TimePicker } from '@material-ui/pickers'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import ComboBox from './ComboBox'
 import { regionType, restrictionType, stateType } from './Utils'
-import { faCoffee, faPlay, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faPlay, faSearch } from '@fortawesome/free-solid-svg-icons'
 
-function DatePickerWrapper (props) {
-  const {
-    input: { name, onChange, value, ...restInput },
-    meta,
-    ...rest
-  } = props
-  const showError =
-    ((meta.submitError && !meta.dirtySinceLastSubmit) || meta.error) &&
-    meta.touched
-
-  return (
-    <DatePicker
-      {...rest}
-      name={name}
-      helperText={showError ? meta.error || meta.submitError : undefined}
-      error={showError}
-      inputProps={restInput}
-      onChange={onChange}
-      value={value === '' ? null : value}
-    />
-  )
-}
-
-function TimePickerWrapper (props) {
-  const {
-    input: { name, onChange, value, ...restInput },
-    meta,
-    ...rest
-  } = props
-  const showError =
-    ((meta.submitError && !meta.dirtySinceLastSubmit) || meta.error) &&
-    meta.touched
-
-  return (
-    <TimePicker
-      {...rest}
-      name={name}
-      helperText={showError ? meta.error || meta.submitError : undefined}
-      error={showError}
-      inputProps={restInput}
-      onChange={onChange}
-      value={value === '' ? null : value}
-    />
-  )
-}
+// function DatePickerWrapper (props) {
+//   const {
+//     input: { name, onChange, value, ...restInput },
+//     meta,
+//     ...rest
+//   } = props
+//   const showError =
+//     ((meta.submitError && !meta.dirtySinceLastSubmit) || meta.error) &&
+//     meta.touched
+//
+//   return (
+//     <DatePicker
+//       {...rest}
+//       name={name}
+//       helperText={showError ? meta.error || meta.submitError : undefined}
+//       error={showError}
+//       inputProps={restInput}
+//       onChange={onChange}
+//       value={value === '' ? null : value}
+//     />
+//   )
+// }
+//
+// function TimePickerWrapper (props) {
+//   const {
+//     input: { name, onChange, value, ...restInput },
+//     meta,
+//     ...rest
+//   } = props
+//   const showError =
+//     ((meta.submitError && !meta.dirtySinceLastSubmit) || meta.error) &&
+//     meta.touched
+//
+//   return (
+//     <TimePicker
+//       {...rest}
+//       name={name}
+//       helperText={showError ? meta.error || meta.submitError : undefined}
+//       error={showError}
+//       inputProps={restInput}
+//       onChange={onChange}
+//       value={value === '' ? null : value}
+//     />
+//   )
+// }
 
 const onSubmit = async values => {
   const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
@@ -88,53 +88,13 @@ const validate = values => {
   return errors
 }
 
-export default function MainForm () {
-  const [periodVal, setPeriodVal] = React.useState('7')
+export default function MainForm (props) {
 
-  const handlePeriod = (event, newValue) => {
-    setPeriodVal(newValue)
-  }
-  const [orderVal, setOrder] = React.useState('asc')
+  const appState = props.state
 
-  const handleOrder = (event, newValue) => {
-    setOrder(newValue)
-  }
-  const [scopeVal, setScope] = React.useState('state')
+  console.log(
+    `\n_____________'appState' = '${JSON.stringify(appState)}'_____________\n`)
 
-  const handleScope = (event, newValue) => {
-    setScope(newValue)
-  }
-
-  const [restrictionVal, setRestriction] = React.useState('Snatch3')
-
-  const handleRestrictionCombo = (event, newValue) => {
-    setRestriction(newValue)
-  }
-
-  const [stateVal, setState] = React.useState('Snatch1')
-
-  const handleStateCombo = (event, newValue) => {
-    setState(newValue)
-  }
-
-  const [regionVal, setRegion] = React.useState('Snatch2')
-
-  const handleRegionCombo = (event, newValue) => {
-    setRegion(newValue)
-  }
-
-  const initialState = {
-    periodVal,
-    orderVal,
-    scopeVal,
-    stateVal,
-    regionVal,
-    restrictionVal,
-    dataSel: [
-      'cases',
-    ],
-
-  }
   return (
     <div>
 
@@ -144,12 +104,12 @@ export default function MainForm () {
           Covid Travel Data Home
         </Typography>
         <Typography variant="h5" align="center" component="h2" gutterBottom>
-          Query Creator <FontAwesomeIcon icon={faSearch} />
+          Query Creator <FontAwesomeIcon icon={faSearch}/>
         </Typography>
 
         <Form
           onSubmit={onSubmit}
-          initialValues={initialState}
+          initialValues={appState.initialState}
           validate={validate}
           render={({ handleSubmit, reset, submitting, pristine, values }) => (
             <form onSubmit={handleSubmit} noValidate>
@@ -164,10 +124,10 @@ export default function MainForm () {
                         Scope
                       </Typography>
                       <Tabs
-                        value={scopeVal}
+                        value={appState.initialState.scopeVal}
                         indicatorColor="primary"
                         textColor="primary"
-                        onChange={handleScope}
+                        onChange={appState.handleScope}
                         aria-label="disabled tabs example"
                       >
                         <Tab label="State" value={'state'}/>
@@ -185,10 +145,10 @@ export default function MainForm () {
                         Time Period
                       </Typography>
                       <Tabs
-                        value={periodVal}
+                        value={appState.initialState.periodVal}
                         indicatorColor="primary"
                         textColor="primary"
-                        onChange={handlePeriod}
+                        onChange={appState.handlePeriod}
                         aria-label="disabled tabs example"
                       >
                         <Tab label="7" value={'7'}/>
@@ -205,10 +165,10 @@ export default function MainForm () {
                         Order
                       </Typography>
                       <Tabs
-                        value={orderVal}
+                        value={appState.initialState.orderVal}
                         indicatorColor="primary"
                         textColor="primary"
-                        onChange={handleOrder}
+                        onChange={appState.handleOrder}
                         aria-label="disabled tabs example"
                       >
                         <Tab label="Asc" value={'asc'}/>
@@ -223,21 +183,24 @@ export default function MainForm () {
                     </Typography>
 
                     <ComboBox type={restrictionType}
-                              cb={handleRestrictionCombo} init={restrictionVal}/>
+                              cb={appState.handleRestrictionCombo}
+                              init={appState.initialState.restrictionVal}/>
                   </Grid>
                   <Grid item xs={6}>
                     <Typography variant="h5" align="center" component="h2"
                                 gutterBottom>
                       State
                     </Typography>
-                    <ComboBox type={stateType} cb={handleStateCombo} init={stateVal}/>
+                    <ComboBox type={stateType} cb={appState.handleStateCombo}
+                              init={appState.initialState.stateVal}/>
                   </Grid>
                   <Grid item xs={6}>
                     <Typography variant="h5" align="center" component="h2"
                                 gutterBottom>
                       Region
                     </Typography>
-                    <ComboBox type={regionType} cb={handleRegionCombo} init={regionVal}/>
+                    <ComboBox type={regionType} cb={appState.handleRegionCombo}
+                              init={appState.initialState.regionVal}/>
                   </Grid>
 
                   <Grid item>
@@ -247,10 +210,10 @@ export default function MainForm () {
                         <FormControlLabel
                           label="Covid Cases"
                           control={
-                            <Field
+                            <Checkbox
+                              onChange={appState.handleDataSel}
+                              checked={appState.initialState.dataSelValue.cases}
                               name="dataSel"
-                              component={Checkbox}
-                              type="checkbox"
                               value="cases"
                             />
                           }
@@ -258,21 +221,21 @@ export default function MainForm () {
                         <FormControlLabel
                           label="Number of Trips"
                           control={
-                            <Field
+                            <Checkbox
+                              onChange={appState.handleDataSel}
+                              checked={appState.initialState.dataSelValue.numTrips}
                               name="dataSel"
-                              component={Checkbox}
-                              type="checkbox"
-                              value="numTrip"
+                              value="numTrips"
                             />
                           }
                         />
                         <FormControlLabel
                           label="Population at home"
                           control={
-                            <Field
+                            <Checkbox
                               name="dataSel"
-                              component={Checkbox}
-                              type="checkbox"
+                              onChange={appState.handleDataSel}
+                              checked={appState.initialState.dataSelValue.popHome}
                               value="popHome"
                             />
                           }
@@ -291,16 +254,16 @@ export default function MainForm () {
                       disabled={submitting}
                       onClick={onSubmit}
                     >
-                      <span style={{paddingRight: 5}}>
+                      <span style={{ paddingRight: 5 }}>
 
                       Visualize
                       </span>
-                      <FontAwesomeIcon icon={faPlay} />
+                      <FontAwesomeIcon icon={faPlay}/>
                     </Button>
                   </Grid>
                 </Grid>
               </Paper>
-              <pre>{JSON.stringify(values, 0, 2)}</pre>
+              <pre>{JSON.stringify(values, 0, 4)}</pre>
             </form>
           )}
         />
