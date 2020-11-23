@@ -1,9 +1,10 @@
 import './App.css'
 import { Nav, Navbar } from 'react-bootstrap'
-import { Route, Switch } from 'react-router-dom'
+import  {  Route, Switch } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
 import Dashboard from './Dashboard'
 import Visualize from './Visualize'
+import Redirect from 'react-router-dom/es/Redirect'
 
 export default function App () {
   return (
@@ -26,14 +27,14 @@ export default function App () {
       </Navbar>
 
       <Switch>
-        <Route path="/dashboard">
+        <Route path={["/dashboard"]} exact >
           <Dashboard/>
         </Route>
-        <Route path="/query">
+        <Route path="/query" exact>
           <Visualize/>
         </Route>
-        <Route path="/">
-          <Home/>
+        <Route path="/" exact>
+          <Redirect to={"/dashboard"}/>
         </Route>
       </Switch>
     </div>
