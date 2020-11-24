@@ -2,11 +2,11 @@
 import React from 'react'
 import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
-import { regionType, stateType } from './Utils'
+import { regionType, stateType } from '../util/Utils'
 
-import usaStates from './data/states.js'
-import restrictions from './data/restriction'
-import regionNames from './data/regions'
+import usaStates from '../data/states.js'
+import restrictions from '../data/restriction'
+import regionNames from '../data/regions'
 
 export default function ComboBox (props) {
 

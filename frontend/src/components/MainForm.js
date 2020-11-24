@@ -19,7 +19,7 @@ import {
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import ComboBox from './ComboBox'
-import { regionType, restrictionType, stateType } from './Utils'
+import { regionType, restrictionType, stateType } from '../util/Utils'
 import { faPlay, faSearch } from '@fortawesome/free-solid-svg-icons'
 
 // function DatePickerWrapper (props) {
@@ -100,9 +100,7 @@ export default function MainForm (props) {
 
       <div style={{ padding: 16, margin: 'auto', maxWidth: 600 }}>
         <CssBaseline/>
-        <Typography variant="h4" align="center" component="h1" gutterBottom>
-          Covid Travel Data Home
-        </Typography>
+
         <Typography variant="h5" align="center" component="h2" gutterBottom>
           Query Creator <FontAwesomeIcon icon={faSearch}/>
         </Typography>

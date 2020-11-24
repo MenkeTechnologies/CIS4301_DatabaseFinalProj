@@ -1,21 +1,16 @@
-import './App.css'
+import './css/App.css'
 import { Nav, Navbar } from 'react-bootstrap'
-import { Redirect, Route, Switch } from 'react-router-dom'
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
-import Dashboard from './Dashboard'
-import Visualize from './Visualize'
+import Dashboard from './components/Dashboard'
+import Visualize from './components/Visualize'
 import React from 'react'
-import { ANY } from './Utils'
+import { ANY, dashboardPath } from './util/Utils'
 
-import { createMuiTheme } from '@material-ui/core/styles';
-import blue from '@material-ui/core/colors/blue';
-import indigo from '@material-ui/core/colors/indigo'
-import pink from '@material-ui/core/colors/pink'
-import red from '@material-ui/core/colors/red'
-import { MuiThemeProvider } from '@material-ui/core'
-import purple from '@material-ui/core/colors/purple'
-import green from '@material-ui/core/colors/green'
-import { useTheme } from '@material-ui/core/styles';
+import { createMuiTheme, useTheme } from '@material-ui/core/styles'
+import { MuiThemeProvider, Paper } from '@material-ui/core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlane } from '@fortawesome/free-solid-svg-icons'
 
 export default function App () {
 
@@ -92,8 +87,7 @@ export default function App () {
     handleDataSel,
   }
 
-
-  const currentTheme = useTheme();
+  const currentTheme = useTheme()
 
   const theme = createMuiTheme({
     overrides: {
@@ -101,53 +95,61 @@ export default function App () {
         root: {
           '&$selected': {
             backgroundColor: currentTheme.palette.primary.dark,
-            color: '#fff'
-          }
-        }
-      }
-    }
+            color: '#fff',
+          },
+        },
+      },
+    },
 
-  });
+  })
+
+  const history = useHistory()
+
+  const navHome = () => {
+    history.push(dashboardPath)
+  }
 
   return (
     <div>
       <MuiThemeProvider theme={theme}>
 
-      <Navbar bg="light" expand="lg">
-        <LinkContainer to="/">
-          <Navbar.Brand>COVID Travel Analysis Application</Navbar.Brand>
-        </LinkContainer>
-        <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-            <LinkContainer to="/dashboard">
-              <Nav.Link>Dashboard</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to="/query">
-              <Nav.Link>Query</Nav.Link>
-            </LinkContainer>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
+        <Navbar bg="light" expand="lg">
+          <LinkContainer to="/dashboard">
+            <Navbar.Brand>COVID Travel Analysis Application</Navbar.Brand>
+          </LinkContainer>
+          <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
+              <LinkContainer to="/dashboard">
+                <Nav.Link>Dashboard</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/query">
+                <Nav.Link>Query</Nav.Link>
+              </LinkContainer>
 
-      <Switch>
-        <Route path={['/dashboard']} exact>
-          <Dashboard state={appState}/>
-        </Route>
-        <Route path="/query" exact>
-          <Visualize state={appState}/>
-        </Route>
-        <Route path="/" exact>
-          <Redirect to={'/dashboard'}/>
-        </Route>
-      </Switch>
+
+            </Nav>
+
+            <Paper square style={{ padding: 10 }} onClick={navHome}>
+              <FontAwesomeIcon align={'center'} icon={faPlane}/>
+            </Paper>
+          </Navbar.Collapse>
+        </Navbar>
+
+        <Switch>
+          <Route path={[dashboardPath]} exact>
+            <Dashboard state={appState}/>
+          </Route>
+          <Route path="/query" exact>
+            <Visualize state={appState}/>
+          </Route>
+          <Route path="/" exact>
+            <Redirect to={dashboardPath}/>
+          </Route>
+        </Switch>
       </MuiThemeProvider>
 
     </div>
 
   )
-}
-
-function Home () {
-  return <h2>Home</h2>
 }
