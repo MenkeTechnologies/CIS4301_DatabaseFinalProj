@@ -26,9 +26,6 @@ try {
   console.error(err)
   process.exit(1)
 }
-
-// TODO: break this all up into files later
-
 // -- Begin Routes ----
 
 app.get('/', function (req, res) {
@@ -38,35 +35,29 @@ app.get('/', function (req, res) {
 
 
 app.post('/handle/:weeks/:topRows', function (req, res) {
-  const weeks = req.params.weeks;
-  const topRows = req.params.topRows;
-  const parsedBody = lib.transformReqBody(req.body);
-  req.parsedBody = parsedBody;
 
-  let selectStatement;
+  const weeks = req.params.weeks
+  const topRows = req.params.topRows
+  const parsedBody = lib.transformReqBody(req.body)
+
+  req.parsedBody = parsedBody
 
   if (parsedBody.dataSelValue.cases) {
 
-    if (parsedBody.scopeVal === 'NATION') {
+    return queries.cases(req, res, weeks, topRows)
 
-      selectStatement = queries.getCovidQueryByNation(parsedBody.periodVal, parsedBody.periodVal + '_DAY_MAX_MOVING_AVERAGE', parsedBody.orderVal)
-      return lib.runQuery(req, res, selectStatement, { weeks, topRows })
-    }
-
-    if (parsedBody.stateVal === "'ANY'") {
-
-      selectStatement = queries.getCovidQueryAllStates(parsedBody.periodVal, parsedBody.periodVal + '_DAY_MAX_MOVING_AVERAGE', parsedBody.orderVal)
-    } else {
-      selectStatement = queries.getCovidQueryByState(parsedBody.periodVal, parsedBody.periodVal + '_DAY_MAX_MOVING_AVERAGE', parsedBody.orderVal, parsedBody.stateVal)
-    }
-
-    return lib.runQuery(req, res, selectStatement, { weeks, topRows })
   } else if (parsedBody.dataSelValue.numTrips) {
+
+    return res.status(400).send('numTrips not implemented')
 
   } else if (parsedBody.dataSelValue.popHome) {
 
+    return queries.popHome(req, res, weeks, topRows)
+
   } else {
-     res.status(400).send("dataSelValue.? must be true");
+
+    return res.status(400).send('dataSelValue.? must be true')
+
   }
 
 })
