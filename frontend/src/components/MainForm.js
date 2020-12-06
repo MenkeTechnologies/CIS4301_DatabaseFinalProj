@@ -31,7 +31,11 @@ import {
   stateType,
   visualizePath,
 } from '../util/Utils';
-import { faPlay, faSearch } from '@fortawesome/free-solid-svg-icons';
+import {
+  faChartBar,
+  faPlay,
+  faSearch,
+} from '@fortawesome/free-solid-svg-icons';
 
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
@@ -268,7 +272,7 @@ export default function MainForm (props) {
                     >
                       <span style={{ paddingRight: 5 }}>
 
-                      Preview Visualization
+                      Run Preview Visualization
                       </span>
                       <FontAwesomeIcon icon={faPlay}/>
                     </Button>
@@ -284,9 +288,9 @@ export default function MainForm (props) {
                     >
                       <span style={{ paddingRight: 5 }}>
 
-                      Full Visualization
+                      Run Full Screen Visualization
                       </span>
-                      <FontAwesomeIcon icon={faPlay}/>
+                      <FontAwesomeIcon icon={faChartBar}/>
                     </Button>
                   </Grid>
                 </Grid>

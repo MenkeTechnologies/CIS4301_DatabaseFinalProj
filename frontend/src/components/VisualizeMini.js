@@ -63,7 +63,7 @@ const VisualizeMini = (props) => {
                   <BarChart state={appState} size={'mini'}/>
 
 
-                  <Grid item style={{ marginTop: 16 }}>
+                  <Grid item style={{ marginTop: 16 }} xs={6}>
                     <Button
                       variant="contained"
                       color="primary"
@@ -73,7 +73,7 @@ const VisualizeMini = (props) => {
                     >
                       <span style={{ paddingRight: 5 }}>
 
-                      Full Screen
+                      Expand Visualization To Full Screen
                       </span>
                       <FontAwesomeIcon icon={faChartBar}/>
                     </Button>
