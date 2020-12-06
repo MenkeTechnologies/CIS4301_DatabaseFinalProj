@@ -21,6 +21,7 @@ class BarChart extends Component {
     const obj = {};
     let data;
     let sourceNames = [], sourceCount = [];
+    let chartTitle = '';
     if (appState.initialState.barData.data.length === 0) {
 
       data = {};
@@ -32,11 +33,17 @@ class BarChart extends Component {
       }
     } else {
 
+      if (appState.initialState.dataSelValue.cases) {
+        chartTitle = 'Covid Cases';
+      } else if (appState.initialState.dataSelValue.popHome) {
+        chartTitle = 'Population at Home';
+      } else {
+        chartTitle = 'Number of Trips';
+      }
+
       let type = appState.initialState.barData.type;
       let allData = appState.initialState.barData.data;
 
-      const bars = [];
-      const labels = [];
       clearKeys(obj);
 
       for (var i = 0; i < allData.length; ++i) {
@@ -50,20 +57,19 @@ class BarChart extends Component {
 
     }
 
-    let margin = { top: 20, right: 20, bottom: 30, left: 40 };
-    let svgWidth = 720, svgHeight = 300;
+    let margin = { top: 20, right: 20, bottom: 30, left: 50 };
+    let svgWidth = 500, svgHeight = 625;
     let height = svgHeight - margin.top - margin.bottom,
       width = svgWidth - margin.left - margin.right;
+
+    let svg = d3.select(node);
+    svg.selectAll('svg > *').remove();
 
     let x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
       y = d3.scaleLinear().rangeRound([height, 0]);
 
     x.domain(sourceNames);
     y.domain([0, d3.max(sourceCount, function (d) { return d; })]);
-
-    let svg = d3.select(node);
-
-    svg.selectAll('svg > *').remove();
 
     svg.attr('height', svgHeight)
       .attr('width', svgWidth);
@@ -78,8 +84,16 @@ class BarChart extends Component {
 
     svg.append('g')
       .attr('class', 'axis axis--y')
-      .call(d3.axisLeft(y).ticks(5))
+      .call(d3.axisLeft(y).ticks(10))
     ;
+
+    svg.append('text')
+      .attr('x', (width / 2))
+      .attr('y', 20 - (margin.top / 2))
+      .attr('text-anchor', 'middle')
+      .style('font-size', '16px')
+      .style('text-decoration', 'underline')
+      .text(chartTitle);
 
 // Create rectangles
     let bars = svg.selectAll('rect')

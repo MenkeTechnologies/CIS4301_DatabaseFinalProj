@@ -38,29 +38,32 @@ app.get('/', function (req, res) {
 
 app.post('/handle/:weeks/:topRows', function (req, res) {
 
-  const weeks = req.params.weeks;
-  const topRows = req.params.topRows;
+  console.log(lib.REQ_DELIM);
+
+  const weeks = req.params.weeks || lib.NUM_WEEKS;
+  const topRows = req.params.topRows || lib.NUM_ROWS;
   const parsedBody = lib.transformReqBody(req.body);
 
-  console.log("transformedBody:", parsedBody);
+  console.log('transformedBody:', parsedBody);
 
   req.parsedBody = parsedBody;
 
   if (parsedBody.dataSelValue.cases) {
 
-    return queries.cases(req, res, weeks, topRows);
+    queries.cases(req, res, weeks, topRows);
 
   } else if (parsedBody.dataSelValue.numTrips) {
 
-    return res.status(400).send('numTrips not implemented');
+    res.status(400).send('numTrips not implemented');
 
   } else if (parsedBody.dataSelValue.popHome) {
 
-    return queries.popHome(req, res, weeks, topRows);
+    queries.popHome(req, res, weeks, topRows);
 
   } else {
 
-    return res.status(400).send('dataSelValue.? must be true');
+    res.status(400).send('dataSelValue.? must be true');
+    console.log(lib.REQ_DELIM);
 
   }
 

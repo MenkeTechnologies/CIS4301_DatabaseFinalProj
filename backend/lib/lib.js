@@ -2,6 +2,10 @@
 //--Query #1
 const oracledb = require('oracledb');
 const _secrets = require('./_secrets.json');
+const NUM_ROWS = 5;
+const NUM_WEEKS = 3;
+const QUERY_DELIM = '\n------------------------------------------------------------------------------------------------\n';
+const REQ_DELIM = '\n=================================================================================================\n';
 
 const config = {
   user: _secrets['DB_USER'],
@@ -38,12 +42,11 @@ function transformReqBody (body) {
 }
 
 function logQuery (query, parms) {
-  let delim = '------------------------------------------------------------------------------------------------';
-  console.log(delim);
+  console.log(QUERY_DELIM);
   console.log(query);
   let values = Object.values(parms);
   console.log('params = ' + values);
-  console.log(delim);
+  console.log(QUERY_DELIM);
 }
 
 function runQuery (req, res, query, parms) {
@@ -72,11 +75,12 @@ function runQuery (req, res, query, parms) {
               ...result.rows,
             ],
           };
-          console.log('db response is ready ' + value);
+          console.log('db response is ready ', value);
           response.writeHead(200, { 'Content-Type': 'application/json' });
           response.end(JSON.stringify(value));
         }
         doRelease(connection);
+        console.log(REQ_DELIM);
       },
     );
   });
@@ -85,7 +89,7 @@ function runQuery (req, res, query, parms) {
 function handleDatabaseOperation (request, response, callback) {
   //var connectString = process.env.DBAAS_DEFAULT_CONNECT_DESCRIPTOR.replace("PDB1", "demos");
   //console.log('ConnectString :' + connectString);
-  console.log("executing query...")
+  console.log('executing query...');
   oracledb.getConnection(config,
     function (err, connection) {
       if (err) {
@@ -148,4 +152,8 @@ module.exports = {
   config,
   getUsername,
   transformReqBody,
+  NUM_ROWS,
+  NUM_WEEKS,
+  QUERY_DELIM,
+  REQ_DELIM,
 };

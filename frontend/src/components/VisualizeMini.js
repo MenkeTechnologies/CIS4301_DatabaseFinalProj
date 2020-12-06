@@ -12,6 +12,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartBar, faChartLine } from '@fortawesome/free-solid-svg-icons';
 import { Form } from 'react-final-form';
+import { H_LEVEL_COMP } from '../util/Utils';
 
 const validate = values => {
   const errors = {};
@@ -42,7 +43,8 @@ const VisualizeMini = (props) => {
       <div style={{ padding: 16, margin: 'auto', maxWidth: 600 }}>
         <CssBaseline/>
 
-        <Typography variant="h5" align="center" component="h2" gutterBottom>
+        <Typography variant="h5" align="center" component={H_LEVEL_COMP}
+                    gutterBottom>
           Visualize <FontAwesomeIcon icon={faChartLine}/>
         </Typography>
 

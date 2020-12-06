@@ -33,7 +33,7 @@ export default function App () {
 
   const handleNumRecords = (event, newValue) => {
     const val = event.target.value;
-      setNumRecords(val);
+    setNumRecords(val);
 
   };
 
@@ -95,7 +95,7 @@ export default function App () {
     restrictionVal,
     dataSelValue,
     barData,
-    numRecords
+    numRecords,
   };
 
   const appState = {
@@ -108,7 +108,7 @@ export default function App () {
     handleRegionCombo,
     handleDataSel,
     handleBarData,
-    handleNumRecords
+    handleNumRecords,
   };
 
   const currentTheme = useTheme();

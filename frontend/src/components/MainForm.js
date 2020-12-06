@@ -23,6 +23,7 @@ import ComboBox from './ComboBox';
 import {
   getApiURL,
   H_LEVEL,
+  H_LEVEL_COMP,
   regionType,
   restrictionType,
   stateType,
@@ -47,7 +48,8 @@ const validate = values => {
 
     errors.numRecords = 'Required to be integer';
   }
-  console.log(`\n_____________'errors' = '${JSON.stringify(errors)}'_____________\n`);
+  // console.log(
+  // `\n_____________'errors' = '${JSON.stringify(errors)}'_____________\n`);
   return errors;
 };
 
@@ -85,7 +87,7 @@ export default function MainForm (props) {
       <div style={{ padding: 16, margin: 'auto', maxWidth: 600 }}>
         <CssBaseline/>
 
-        <Typography variant={H_LEVEL} align="center" component="h2"
+        <Typography variant={H_LEVEL} align="center" component={H_LEVEL_COMP}
                     gutterBottom>
           Query Creator <FontAwesomeIcon icon={faSearch}/>
         </Typography>
@@ -103,7 +105,7 @@ export default function MainForm (props) {
                   <Grid item xs={12}>
                     <Paper square>
                       <Typography variant={H_LEVEL} align="center"
-                                  component="h2"
+                                  component={H_LEVEL_COMP}
                                   gutterBottom>
                         Scope
                       </Typography>
@@ -125,7 +127,7 @@ export default function MainForm (props) {
                   <Grid item xs={12}>
                     <Paper square>
                       <Typography variant={H_LEVEL} align="center"
-                                  component="h2"
+                                  component={H_LEVEL_COMP}
                                   gutterBottom>
                         Time Period
                       </Typography>
@@ -146,7 +148,7 @@ export default function MainForm (props) {
                   <Grid item xs={12}>
                     <Paper square>
                       <Typography variant={H_LEVEL} align="center"
-                                  component="h2"
+                                  component={H_LEVEL_COMP}
                                   gutterBottom>
                         Order
                       </Typography>
@@ -163,7 +165,8 @@ export default function MainForm (props) {
                     </Paper>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography variant={H_LEVEL} align="center" component="h2"
+                    <Typography variant={H_LEVEL} align="center"
+                                component={H_LEVEL_COMP}
                                 gutterBottom>
                       Restriction Type
                     </Typography>
@@ -173,7 +176,8 @@ export default function MainForm (props) {
                               init={appState.initialState.restrictionVal}/>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography variant={H_LEVEL} align="center" component="h2"
+                    <Typography variant={H_LEVEL} align="center"
+                                component={H_LEVEL_COMP}
                                 gutterBottom>
                       State
                     </Typography>
@@ -181,7 +185,8 @@ export default function MainForm (props) {
                               init={appState.initialState.stateVal}/>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography variant={H_LEVEL} align="center" component="h2"
+                    <Typography variant={H_LEVEL} align="center"
+                                component={H_LEVEL_COMP}
                                 gutterBottom>
                       Region
                     </Typography>
@@ -197,7 +202,6 @@ export default function MainForm (props) {
                     </Typography>
                     <TextField label="Records" variant="outlined"
                                onChange={appState.handleNumRecords}
-                               error={"Required"}
                                value={appState.initialState.numRecords}/>
 
                   </Grid>
@@ -228,7 +232,7 @@ export default function MainForm (props) {
                           }
                         />
                         <FormControlLabel
-                          label="Population at home"
+                          label="Population at Home"
                           control={
                             <Checkbox
                               name="dataSel"

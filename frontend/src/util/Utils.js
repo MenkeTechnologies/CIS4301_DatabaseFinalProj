@@ -7,7 +7,8 @@ export const dashboardPath = '/dashboard';
 export const BAR_COLOR = '#ee9922';
 const NUM_WEEKS = '3';
 const NUM_ROWS = '10';
-export const H_LEVEL = "h6";
+export const H_LEVEL = 'h6';
+export const H_LEVEL_COMP = 'h6';
 
 export const getApiURL = (data) => {
 
@@ -21,7 +22,7 @@ export const getApiURL = (data) => {
 
     return `http://localhost:8000/handle/${NUM_WEEKS}/${NUM_ROWS}`;
   }
-}
+};
 
 export const clearKeys = (obj) => {
   for (const variableKey in obj) {

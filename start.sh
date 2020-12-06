@@ -1,8 +1,8 @@
 
-if [[ -z $1 ] ]; then
+if [[ -z $1 ]]; then
   cd backend
   npm run start
-  else
+else
   cd backend
   npm run start &
   cd ..
