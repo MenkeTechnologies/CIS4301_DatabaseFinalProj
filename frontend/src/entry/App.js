@@ -5,7 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import Dashboard from '../components/Dashboard';
 import Visualize from '../components/Visualize';
 import React from 'react';
-import { ANY, dashboardPath } from '../util/Utils';
+import { ANY, dashboardPath, visualizePath } from '../util/Utils';
 
 import { createMuiTheme, useTheme } from '@material-ui/core/styles';
 import { MuiThemeProvider, Paper } from '@material-ui/core';
@@ -144,11 +144,11 @@ export default function App () {
           <Navbar.Toggle aria-controls="basic-navbar-nav"/>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <LinkContainer to="/dashboard">
+              <LinkContainer to={dashboardPath}>
                 <Nav.Link>Dashboard</Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/query">
-                <Nav.Link>Query</Nav.Link>
+              <LinkContainer to={visualizePath}>
+                <Nav.Link>Visualize</Nav.Link>
               </LinkContainer>
 
 
@@ -164,7 +164,7 @@ export default function App () {
           <Route path={[dashboardPath]} exact>
             <Dashboard state={appState}/>
           </Route>
-          <Route path="/query" exact>
+          <Route path={[visualizePath]} exact>
             <Visualize state={appState}/>
           </Route>
           <Route path="/" exact>

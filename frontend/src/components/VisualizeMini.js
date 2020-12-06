@@ -12,7 +12,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartBar, faChartLine } from '@fortawesome/free-solid-svg-icons';
 import { Form } from 'react-final-form';
-import { H_LEVEL_COMP } from '../util/Utils';
+import { H_LEVEL_COMP, visualizePath } from '../util/Utils';
 
 const validate = values => {
   const errors = {};
@@ -34,7 +34,7 @@ const VisualizeMini = (props) => {
   const history = useHistory();
 
   const onSubmit = e => {
-    history.push('/query');
+    history.push(visualizePath);
   };
 
   return (
@@ -60,8 +60,7 @@ const VisualizeMini = (props) => {
                 <Grid container alignItems="flex-start" spacing={2}>
 
 
-                  <BarChart data={[5, 10, 1, 3, 23, 35]} state={appState}
-                            size={[500, 500]}/>
+                  <BarChart state={appState} size={'mini'}/>
 
 
                   <Grid item style={{ marginTop: 16 }}>

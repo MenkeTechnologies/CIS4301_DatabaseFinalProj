@@ -1,17 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import BarChart from './BarChart';
 
-class Visualize extends Component {
-  render () {
-    return (
-      <div>
-        <h2>query</h2>
+const Visualize = (props) => {
+  const appState = props.state;
+  return (
+    <div>
 
-        <BarChart data={[5, 10, 1, 3]} size={[500, 500]}/>
+      <BarChart state={appState} size={'maxi'}/>
 
-      </div>
-    );
-  }
-}
+    </div>
+  );
+
+};
 
 export default Visualize;

@@ -27,10 +27,12 @@ import {
   regionType,
   restrictionType,
   stateType,
+  visualizePath,
 } from '../util/Utils';
 import { faPlay, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const validate = values => {
   const errors = {};
@@ -56,8 +58,9 @@ const validate = values => {
 export default function MainForm (props) {
 
   const appState = props.state;
+  const history = useHistory();
 
-  const onSubmit = async values => {
+  const onSubmit = async (values, origin) => {
 
     try {
       const apiURL = getApiURL({
@@ -74,6 +77,11 @@ export default function MainForm (props) {
       console.log(
         `\n_____________'data' = '${JSON.stringify(data)}'_____________\n`);
       appState.handleBarData(res.data);
+
+      if (origin === 'maxi') {
+
+        history.push(visualizePath);
+      }
 
     } catch (error) {
       console.log(Object.keys(error), error.message);
@@ -93,7 +101,7 @@ export default function MainForm (props) {
         </Typography>
 
         <Form
-          onSubmit={() => onSubmit(appState)}
+          onSubmit={() => onSubmit(appState, 'init')}
           initialValues={appState.initialState}
           validate={validate}
           render={({ handleSubmit, reset, submitting, pristine, values }) => (
@@ -248,17 +256,33 @@ export default function MainForm (props) {
                   </Grid>
 
 
-                  <Grid item style={{ marginTop: 16 }}>
+                  <Grid item style={{ marginTop: 16 }} xs={6}>
                     <Button
                       variant="contained"
                       color="primary"
                       type="submit"
                       disabled={submitting}
-                      onClick={() => onSubmit(values)}
+                      onClick={() => onSubmit(values, 'mini')}
                     >
                       <span style={{ paddingRight: 5 }}>
 
-                      Visualize
+                      Visualize To Right
+                      </span>
+                      <FontAwesomeIcon icon={faPlay}/>
+                    </Button>
+                  </Grid>
+                  <Grid item style={{ marginTop: 16 }} xs={6}>
+
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      type="submit"
+                      disabled={submitting}
+                      onClick={() => onSubmit(values, 'maxi')}
+                    >
+                      <span style={{ paddingRight: 5 }}>
+
+                      Visualize Full Screen
                       </span>
                       <FontAwesomeIcon icon={faPlay}/>
                     </Button>
