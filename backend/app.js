@@ -34,9 +34,9 @@ app.get('/', function (req, res) {
   res.send('The server is working. Hooray!')
 })
 
-app.get('/query01/:weeks/:toprows', function (req, res) {
+app.get('/query01/:weeks/:topRows', function (req, res) {
   const weeks = req.params.weeks
-  const toprows = req.params.toprows
+  const topRows = req.params.topRows
 
   const selectStatement =
     `SELECT STATE, MAX("7_DAY_MOVING_AVERAGE") AS "MAX_7_DAY_MOVING_AVERAGE"
@@ -53,17 +53,16 @@ app.get('/query01/:weeks/:toprows', function (req, res) {
                          FROM COVID_19_CASES)
           )
      GROUP BY STATE
-     ORDER BY "MAX_7_DAY_MOVING_AVERAGE" DESC FETCH FIRST :toprows ROWS ONLY`
+     ORDER BY "MAX_7_DAY_MOVING_AVERAGE" DESC FETCH FIRST :topRows ROWS ONLY`
 
-  lib.runQuery(req, res, selectStatement, { weeks, toprows })
+  lib.runQuery(req, res, selectStatement, { weeks, topRows })
 })
-
-lib.getUsername()
 
 // -- End Database ----
 
 const port = process.env.PORT || 8000
 
 app.listen(port, () => {
+  lib.getUsername()
   console.log(`Listening on port: ${port}`)
 })
