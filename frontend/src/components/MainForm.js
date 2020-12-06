@@ -22,6 +22,8 @@ import ComboBox from './ComboBox'
 import { regionType, restrictionType, stateType } from '../util/Utils'
 import { faPlay, faSearch } from '@fortawesome/free-solid-svg-icons'
 
+import axios from 'axios';
+
 // function DatePickerWrapper (props) {
 //   const {
 //     input: { name, onChange, value, ...restInput },
@@ -68,10 +70,19 @@ import { faPlay, faSearch } from '@fortawesome/free-solid-svg-icons'
 //   )
 // }
 
+const url1 = "http://localhost:8000/handle/10/1"
+
 const onSubmit = async values => {
-  const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-  await sleep(300)
-  window.alert(JSON.stringify(values, 0, 2))
+  axios({
+    method: 'post',
+    url: url1,
+    data: values
+  })
+  .then(function (response) {
+    console.log(`\n_____________'response' = '${JSON.stringify(response)}'_____________\n`);
+  });
+
+
 }
 
 const validate = values => {
@@ -169,8 +180,8 @@ export default function MainForm (props) {
                         onChange={appState.handleOrder}
                         aria-label="disabled tabs example"
                       >
-                        <Tab label="Asc" value={'asc'}/>
-                        <Tab label="Desc" value={'desc'}/>
+                        <Tab label="Asc" value={'ASC'}/>
+                        <Tab label="Desc" value={'DESC'}/>
                       </Tabs>
                     </Paper>
                   </Grid>
