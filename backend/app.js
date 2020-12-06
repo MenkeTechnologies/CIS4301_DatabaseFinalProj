@@ -42,6 +42,8 @@ app.post('/handle/:weeks/:topRows', function (req, res) {
   const topRows = req.params.topRows;
   const parsedBody = lib.transformReqBody(req.body);
 
+  console.log("transformedBody:", parsedBody);
+
   req.parsedBody = parsedBody;
 
   if (parsedBody.dataSelValue.cases) {

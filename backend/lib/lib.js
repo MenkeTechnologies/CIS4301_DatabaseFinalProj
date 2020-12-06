@@ -83,11 +83,9 @@ function runQuery (req, res, query, parms) {
 }
 
 function handleDatabaseOperation (request, response, callback) {
-  console.log(request.method + ':' + request.url);
-
-  console.log('Handle request: ' + request.url);
   //var connectString = process.env.DBAAS_DEFAULT_CONNECT_DESCRIPTOR.replace("PDB1", "demos");
   //console.log('ConnectString :' + connectString);
+  console.log("executing query...")
   oracledb.getConnection(config,
     function (err, connection) {
       if (err) {

@@ -96,9 +96,9 @@ class BarChart extends Component {
       .attr('height', function (d) { return height - y(data[d]); });
 
     bars.append('text')
-      .text(function (d) {
-        return data[d];
-      })
+      // .text(function (d) {
+      //   return data[d];
+      // })
       .attr('x', function (d) {
         return x(d) + x.bandwidth() / 2;
       })

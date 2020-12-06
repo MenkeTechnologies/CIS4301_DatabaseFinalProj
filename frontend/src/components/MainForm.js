@@ -13,28 +13,41 @@ import {
   FormLabel,
   Grid,
   Paper,
+  TextField,
   Typography,
 } from '@material-ui/core';
 // Picker
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import ComboBox from './ComboBox';
-import { API_URL, regionType, restrictionType, stateType } from '../util/Utils';
+import {
+  getApiURL,
+  H_LEVEL,
+  regionType,
+  restrictionType,
+  stateType,
+} from '../util/Utils';
 import { faPlay, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 import axios from 'axios';
 
 const validate = values => {
   const errors = {};
-  if (!values.firstName) {
-    errors.firstName = 'Required';
+  // if (!values.firstName) {
+  //   errors.firstName = 'Required';
+  // }
+  // if (!values.lastName) {
+  //   errors.lastName = 'Required';
+  // }
+  // if (!values.email) {
+  //   errors.email = 'Required';
+  // }
+
+  if (!values.numRecords || !isNaN(parseInt(values.numRecords))) {
+
+    errors.numRecords = 'Required to be integer';
   }
-  if (!values.lastName) {
-    errors.lastName = 'Required';
-  }
-  if (!values.email) {
-    errors.email = 'Required';
-  }
+  console.log(`\n_____________'errors' = '${JSON.stringify(errors)}'_____________\n`);
   return errors;
 };
 
@@ -45,7 +58,12 @@ export default function MainForm (props) {
   const onSubmit = async values => {
 
     try {
-      const res = await axios.post(API_URL, values);
+      const apiURL = getApiURL({
+        numRecords: appState.initialState.numRecords,
+      });
+      console.log(
+        `\n_____________'apiURL' = '${JSON.stringify(apiURL)}'_____________\n`);
+      const res = await axios.post(apiURL, values);
       const type = res.data.type;
       const data = res.data.data;
 
@@ -67,7 +85,8 @@ export default function MainForm (props) {
       <div style={{ padding: 16, margin: 'auto', maxWidth: 600 }}>
         <CssBaseline/>
 
-        <Typography variant="h5" align="center" component="h2" gutterBottom>
+        <Typography variant={H_LEVEL} align="center" component="h2"
+                    gutterBottom>
           Query Creator <FontAwesomeIcon icon={faSearch}/>
         </Typography>
 
@@ -83,7 +102,8 @@ export default function MainForm (props) {
                 <Grid container alignItems="flex-start" spacing={2}>
                   <Grid item xs={12}>
                     <Paper square>
-                      <Typography variant="h5" align="center" component="h2"
+                      <Typography variant={H_LEVEL} align="center"
+                                  component="h2"
                                   gutterBottom>
                         Scope
                       </Typography>
@@ -104,7 +124,8 @@ export default function MainForm (props) {
 
                   <Grid item xs={12}>
                     <Paper square>
-                      <Typography variant="h5" align="center" component="h2"
+                      <Typography variant={H_LEVEL} align="center"
+                                  component="h2"
                                   gutterBottom>
                         Time Period
                       </Typography>
@@ -124,7 +145,8 @@ export default function MainForm (props) {
 
                   <Grid item xs={12}>
                     <Paper square>
-                      <Typography variant="h5" align="center" component="h2"
+                      <Typography variant={H_LEVEL} align="center"
+                                  component="h2"
                                   gutterBottom>
                         Order
                       </Typography>
@@ -141,7 +163,7 @@ export default function MainForm (props) {
                     </Paper>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography variant="h5" align="center" component="h2"
+                    <Typography variant={H_LEVEL} align="center" component="h2"
                                 gutterBottom>
                       Restriction Type
                     </Typography>
@@ -151,7 +173,7 @@ export default function MainForm (props) {
                               init={appState.initialState.restrictionVal}/>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography variant="h5" align="center" component="h2"
+                    <Typography variant={H_LEVEL} align="center" component="h2"
                                 gutterBottom>
                       State
                     </Typography>
@@ -159,14 +181,26 @@ export default function MainForm (props) {
                               init={appState.initialState.stateVal}/>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography variant="h5" align="center" component="h2"
+                    <Typography variant={H_LEVEL} align="center" component="h2"
                                 gutterBottom>
                       Region
                     </Typography>
                     <ComboBox type={regionType} cb={appState.handleRegionCombo}
                               init={appState.initialState.regionVal}/>
-                  </Grid>
 
+
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography variant={H_LEVEL} align="center" component="h3"
+                                gutterBottom>
+                      Number of Records
+                    </Typography>
+                    <TextField label="Records" variant="outlined"
+                               onChange={appState.handleNumRecords}
+                               error={"Required"}
+                               value={appState.initialState.numRecords}/>
+
+                  </Grid>
                   <Grid item>
                     <FormControl component="fieldset">
                       <FormLabel component="legend">Data Selector</FormLabel>

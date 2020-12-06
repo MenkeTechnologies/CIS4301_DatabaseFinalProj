@@ -29,6 +29,13 @@ export default function App () {
   const handleScope = (event, newValue) => {
     setScope(newValue);
   };
+  const [numRecords, setNumRecords] = React.useState(5);
+
+  const handleNumRecords = (event, newValue) => {
+    const val = event.target.value;
+      setNumRecords(val);
+
+  };
 
   const [restrictionVal, setRestriction] = React.useState(ANY);
 
@@ -88,6 +95,7 @@ export default function App () {
     restrictionVal,
     dataSelValue,
     barData,
+    numRecords
   };
 
   const appState = {
@@ -100,6 +108,7 @@ export default function App () {
     handleRegionCombo,
     handleDataSel,
     handleBarData,
+    handleNumRecords
   };
 
   const currentTheme = useTheme();
