@@ -4,10 +4,6 @@ import { select } from 'd3-selection';
 import { scaleLinear } from 'd3-scale';
 
 class BarChart extends Component {
-  constructor (props) {
-    super(props);
-    this.createBarChart = this.createBarChart.bind(this);
-  }
 
   componentDidMount () {
     this.createBarChart();
@@ -17,7 +13,7 @@ class BarChart extends Component {
     this.createBarChart();
   }
 
-  createBarChart () {
+  createBarChart = () => {
     const node = this.node;
     const dataMax = max(this.props.data);
     const yScale = scaleLinear()
@@ -35,7 +31,7 @@ class BarChart extends Component {
       .attr('y', d => this.props.size[1] - yScale(d))
       .attr('height', d => yScale(d))
       .attr('width', 25);
-  }
+  };
 
   render () {
     return <svg ref={node => this.node = node}

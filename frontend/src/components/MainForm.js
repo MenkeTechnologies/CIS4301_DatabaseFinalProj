@@ -26,20 +26,19 @@ import axios from 'axios';
 
 const onSubmit = async values => {
 
-  axios({
-    method: 'post',
-    url: API_URL,
-    data: values,
-  })
-    .then(function (response) {
-      console.log(`\n_____________'response' = '${JSON.stringify(
-        response)}'_____________\n`);
-    }).catch((err) => {
+  try {
+    const res = await axios.post(API_URL, values);
+    const type = res.data.type;
+    const data = res.data.data;
 
     console.log(
-      `\n_____________'err' = '${JSON.stringify(err)}'_____________\n`);
+      `\n_____________'type' = '${JSON.stringify(type)}'_____________\n`);
+    console.log(
+      `\n_____________'data' = '${JSON.stringify(data)}'_____________\n`);
 
-  });
+  } catch (error) {
+    console.log(Object.keys(error), error.message);
+  }
 
 };
 
@@ -61,9 +60,6 @@ export default function MainForm (props) {
 
   const appState = props.state;
 
-  console.log(
-    `\n_____________'appState' = '${JSON.stringify(appState)}'_____________\n`);
-
   return (
     <div>
 
@@ -75,7 +71,7 @@ export default function MainForm (props) {
         </Typography>
 
         <Form
-          onSubmit={onSubmit}
+          onSubmit={() => onSubmit(appState)}
           initialValues={appState.initialState}
           validate={validate}
           render={({ handleSubmit, reset, submitting, pristine, values }) => (
@@ -219,7 +215,7 @@ export default function MainForm (props) {
                       color="primary"
                       type="submit"
                       disabled={submitting}
-                      onClick={onSubmit}
+                      onClick={() => onSubmit(values)}
                     >
                       <span style={{ paddingRight: 5 }}>
 

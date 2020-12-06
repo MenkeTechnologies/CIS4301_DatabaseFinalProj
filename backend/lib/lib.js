@@ -82,12 +82,6 @@ function runQuery (req, res, query, parms) {
 
 function handleDatabaseOperation (request, response, callback) {
   console.log(request.method + ':' + request.url);
-  response.setHeader('Access-Control-Allow-Origin', '*');
-  response.setHeader('Access-Control-Allow-Methods',
-    'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  response.setHeader('Access-Control-Allow-Headers',
-    'X-Requested-With,content-type');
-  response.setHeader('Access-Control-Allow-Credentials', true);
 
   console.log('Handle request: ' + request.url);
   //var connectString = process.env.DBAAS_DEFAULT_CONNECT_DESCRIPTOR.replace("PDB1", "demos");
