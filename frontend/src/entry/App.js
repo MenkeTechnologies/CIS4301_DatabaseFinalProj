@@ -24,7 +24,7 @@ export default function App () {
   const handleOrder = (event, newValue) => {
     setOrder(newValue);
   };
-  const [scopeVal, setScope] = React.useState('state');
+  const [scopeVal, setScope] = React.useState('STATE');
 
   const handleScope = (event, newValue) => {
     setScope(newValue);

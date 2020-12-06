@@ -21,10 +21,10 @@ function transformReqBody (body) {
   const defaultObj = {
     periodVal: body.periodVal || '7',
     orderVal: body.orderVal ? body.orderVal.toUpperCase() : 'ASC',
-    scopeVal: body.scopeVal || 'state',
+    scopeVal: body.scopeVal ? body.scopeVal.toUpperCase() : 'STATE',
     stateVal: stateStr,
-    regionVal: body.regionVal || 'ANY',
-    restrictionVal: body.restrictionVal || 'ANY',
+    regionVal: body.regionVal ? body.regionVal.toUpperCase() : 'ANY',
+    restrictionVal: body.restrictionVal ? body.restrictionVal.toUpperCase() : 'ANY',
     dataSelValue: {
       cases: body.dataSelValue.cases || false,
       numTrips: body.dataSelValue.numTrips || false,

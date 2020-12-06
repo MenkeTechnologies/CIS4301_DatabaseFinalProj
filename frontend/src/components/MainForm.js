@@ -93,9 +93,9 @@ export default function MainForm (props) {
                         onChange={appState.handleScope}
                         aria-label="disabled tabs example"
                       >
-                        <Tab label="State" value={'state'}/>
-                        <Tab label="Nation" value={'nation'}/>
-                        <Tab label="Region" value={'region'}/>
+                        <Tab label="State" value={'STATE'}/>
+                        <Tab label="Nation" value={'NATION'}/>
+                        <Tab label="Region" value={'REGION'}/>
                       </Tabs>
                     </Paper>
                   </Grid>

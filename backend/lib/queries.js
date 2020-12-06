@@ -162,14 +162,14 @@ function cases (req, res, weeks, topRows) {
   let selectStatement;
   const parsedBody = req.parsedBody;
 
-  if (parsedBody.scopeVal === 'NATION') {
+  if (parsedBody.scopeVal.toUpperCase() === 'NATION') {
 
     selectStatement = getCovidQueryByNation(parsedBody.periodVal,
       parsedBody.periodVal + '_DAY_MAX_MOVING_AVERAGE', parsedBody.orderVal);
     return lib.runQuery(req, res, selectStatement, { weeks, topRows });
   }
 
-  if (parsedBody.stateVal === '\'ANY\'') {
+  if (parsedBody.stateVal.toUpperCase() === '\'ANY\'') {
 
     selectStatement = getCovidQueryAllStates(parsedBody.periodVal,
       parsedBody.periodVal + '_DAY_MAX_MOVING_AVERAGE', parsedBody.orderVal);
