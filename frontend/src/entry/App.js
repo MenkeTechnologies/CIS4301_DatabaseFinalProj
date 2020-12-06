@@ -66,6 +66,19 @@ export default function App () {
     setDataSel(newMap);
   };
 
+  const [barData, setBarData] = React.useState({
+    type: {
+      cases: true,
+      numTrips: false,
+      popHome: false,
+    },
+    data: [],
+  });
+
+  const handleBarData = (newValue) => {
+    setBarData(newValue);
+  };
+
   const initialState = {
     periodVal,
     orderVal,
@@ -74,6 +87,7 @@ export default function App () {
     regionVal,
     restrictionVal,
     dataSelValue,
+    barData,
   };
 
   const appState = {
@@ -85,6 +99,7 @@ export default function App () {
     handleStateCombo,
     handleRegionCombo,
     handleDataSel,
+    handleBarData,
   };
 
   const currentTheme = useTheme();

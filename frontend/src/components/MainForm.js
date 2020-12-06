@@ -24,24 +24,6 @@ import { faPlay, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 import axios from 'axios';
 
-const onSubmit = async values => {
-
-  try {
-    const res = await axios.post(API_URL, values);
-    const type = res.data.type;
-    const data = res.data.data;
-
-    console.log(
-      `\n_____________'type' = '${JSON.stringify(type)}'_____________\n`);
-    console.log(
-      `\n_____________'data' = '${JSON.stringify(data)}'_____________\n`);
-
-  } catch (error) {
-    console.log(Object.keys(error), error.message);
-  }
-
-};
-
 const validate = values => {
   const errors = {};
   if (!values.firstName) {
@@ -59,6 +41,25 @@ const validate = values => {
 export default function MainForm (props) {
 
   const appState = props.state;
+
+  const onSubmit = async values => {
+
+    try {
+      const res = await axios.post(API_URL, values);
+      const type = res.data.type;
+      const data = res.data.data;
+
+      console.log(
+        `\n_____________'type' = '${JSON.stringify(type)}'_____________\n`);
+      console.log(
+        `\n_____________'data' = '${JSON.stringify(data)}'_____________\n`);
+      appState.handleBarData(res.data);
+
+    } catch (error) {
+      console.log(Object.keys(error), error.message);
+    }
+
+  };
 
   return (
     <div>

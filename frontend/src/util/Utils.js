@@ -7,3 +7,12 @@ export const dashboardPath = '/dashboard';
 const NUM_WEEKS = '3';
 const NUM_ROWS = '10';
 export const API_URL = `http://localhost:8000/handle/${NUM_WEEKS}/${NUM_ROWS}`;
+
+export const clearKeys = (obj) => {
+  for (const variableKey in obj) {
+    if (obj.hasOwnProperty(variableKey)) {
+      delete obj[variableKey];
+    }
+  }
+
+};

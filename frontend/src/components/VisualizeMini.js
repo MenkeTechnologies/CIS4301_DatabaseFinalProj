@@ -58,7 +58,8 @@ const VisualizeMini = (props) => {
                 <Grid container alignItems="flex-start" spacing={2}>
 
 
-                  <BarChart data={[5, 10, 1, 3, 23, 35]} size={[500, 500]}/>
+                  <BarChart data={[5, 10, 1, 3, 23, 35]} state={appState}
+                            size={[500, 500]}/>
 
 
                   <Grid item style={{ marginTop: 16 }}>
