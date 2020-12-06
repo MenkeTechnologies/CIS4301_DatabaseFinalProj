@@ -19,7 +19,7 @@ export default function App () {
   const handlePeriod = (event, newValue) => {
     setPeriodVal(newValue);
   };
-  const [orderVal, setOrder] = React.useState('ASC');
+  const [orderVal, setOrder] = React.useState('DESC');
 
   const handleOrder = (event, newValue) => {
     setOrder(newValue);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
 
-import { clearKeys } from '../util/Utils';
+import { BAR_COLOR, clearKeys } from '../util/Utils';
 
 class BarChart extends Component {
 
@@ -89,7 +89,7 @@ class BarChart extends Component {
 
     bars.append('rect')
       .attr('class', 'bar')
-      .style('fill', '#ee9922')
+      .style('fill', BAR_COLOR)
       .attr('x', function (d) { return x(d); })
       .attr('y', function (d) { return y(data[d]); })
       .attr('width', x.bandwidth())
