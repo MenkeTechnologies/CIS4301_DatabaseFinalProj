@@ -33,9 +33,9 @@ export const debugJson = (values) => {
   if (DEBUG_GLOBAL) {
     json = <pre>{JSON.stringify(values, 0, 4)}</pre>;
   }
-  return json
+  return json;
 
-}
+};
 
 export const createBarChart = (appState, svgHeight, svgWidth, node) => {
 

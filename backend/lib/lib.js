@@ -19,7 +19,7 @@ function transformReqBody (body) {
   if (body.stateVal) {
     stateStr = `'${body.stateVal}'`;
   } else {
-    stateStr = 'ANY';
+    stateStr = `'ANY'`;
   }
 
   const defaultObj = {

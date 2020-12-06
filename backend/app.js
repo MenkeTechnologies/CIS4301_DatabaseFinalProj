@@ -73,6 +73,11 @@ app.post('/handle/:weeks/:topRows', function (req, res) {
 
 const port = process.env.PORT || 8000;
 
+process.on('SIGINT', () => {
+  console.log(`Handle sigint`);
+  process.exit(0);
+});
+
 app.listen(port, () => {
   lib.getUsername();
   console.log(`Listening on port: ${port}`);

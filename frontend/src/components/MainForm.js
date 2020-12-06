@@ -21,7 +21,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import ComboBox from './ComboBox';
 import {
-  DEBUG_GLOBAL, debugJson, debugLog,
+  debugJson,
+  debugLog,
   getApiURL,
   H_LEVEL,
   H_LEVEL_COMP,
@@ -51,7 +52,8 @@ const validate = values => {
 
     errors.numRecords = 'Required to be integer';
   }
-  debugLog( `\n_____________'errors' = '${JSON.stringify(errors)}'_____________\n`);
+  debugLog(
+    `\n_____________'errors' = '${JSON.stringify(errors)}'_____________\n`);
   return errors;
 };
 
@@ -266,7 +268,7 @@ export default function MainForm (props) {
                     >
                       <span style={{ paddingRight: 5 }}>
 
-                      Visualize To Right
+                      Preview Visualization
                       </span>
                       <FontAwesomeIcon icon={faPlay}/>
                     </Button>
@@ -282,7 +284,7 @@ export default function MainForm (props) {
                     >
                       <span style={{ paddingRight: 5 }}>
 
-                      Visualize Full Screen
+                      Full Visualization
                       </span>
                       <FontAwesomeIcon icon={faPlay}/>
                     </Button>
