@@ -19,68 +19,26 @@ import {
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import ComboBox from './ComboBox'
-import { regionType, restrictionType, stateType } from '../util/Utils'
+import { API_URL, regionType, restrictionType, stateType } from '../util/Utils'
 import { faPlay, faSearch } from '@fortawesome/free-solid-svg-icons'
 
-import axios from 'axios';
-
-// function DatePickerWrapper (props) {
-//   const {
-//     input: { name, onChange, value, ...restInput },
-//     meta,
-//     ...rest
-//   } = props
-//   const showError =
-//     ((meta.submitError && !meta.dirtySinceLastSubmit) || meta.error) &&
-//     meta.touched
-//
-//   return (
-//     <DatePicker
-//       {...rest}
-//       name={name}
-//       helperText={showError ? meta.error || meta.submitError : undefined}
-//       error={showError}
-//       inputProps={restInput}
-//       onChange={onChange}
-//       value={value === '' ? null : value}
-//     />
-//   )
-// }
-//
-// function TimePickerWrapper (props) {
-//   const {
-//     input: { name, onChange, value, ...restInput },
-//     meta,
-//     ...rest
-//   } = props
-//   const showError =
-//     ((meta.submitError && !meta.dirtySinceLastSubmit) || meta.error) &&
-//     meta.touched
-//
-//   return (
-//     <TimePicker
-//       {...rest}
-//       name={name}
-//       helperText={showError ? meta.error || meta.submitError : undefined}
-//       error={showError}
-//       inputProps={restInput}
-//       onChange={onChange}
-//       value={value === '' ? null : value}
-//     />
-//   )
-// }
-
-const url1 = "http://localhost:8000/handle/10/1"
+import axios from 'axios'
 
 const onSubmit = async values => {
+
   axios({
     method: 'post',
-    url: url1,
+    url: API_URL,
     data: values
   })
   .then(function (response) {
     console.log(`\n_____________'response' = '${JSON.stringify(response)}'_____________\n`);
-  });
+  }).catch((err) => {
+    
+    console.log(`\n_____________'err' = '${JSON.stringify(err)}'_____________\n`);
+      
+    
+  })
 
 
 }
