@@ -53,9 +53,9 @@ export const createBarChart = (appState, svgHeight, svgWidth, node) => {
     }
   } else {
 
-    if (appState.initialState.dataSelValue.cases) {
+    if (appState.initialState.dataSelValue === 'cases') {
       chartTitle = 'Covid Cases';
-    } else if (appState.initialState.dataSelValue.popHome) {
+    } else if (appState.initialState.dataSelValue === 'popHome') {
       chartTitle = 'Population at Home';
     } else {
       chartTitle = 'Number of Trips';

@@ -12,7 +12,7 @@ import {
   FormGroup,
   FormLabel,
   Grid,
-  Paper,
+  Paper, Radio, RadioGroup,
   TextField,
   Typography,
 } from '@material-ui/core';
@@ -222,14 +222,14 @@ export default function MainForm (props) {
                   <Grid item>
                     <FormControl component="fieldset">
                       <FormLabel component="legend">Data Selector</FormLabel>
-                      <FormGroup row>
+                      <RadioGroup row name="dataSel"
+                        onChange={appState.handleDataSel}
+                                  value={appState.initialState.dataSelValue}
+                      >
                         <FormControlLabel
                           label="Covid Cases"
                           control={
-                            <Checkbox
-                              onChange={appState.handleDataSel}
-                              checked={appState.initialState.dataSelValue.cases}
-                              name="dataSel"
+                            <Radio
                               value="cases"
                             />
                           }
@@ -237,10 +237,7 @@ export default function MainForm (props) {
                         <FormControlLabel
                           label="Number of Trips"
                           control={
-                            <Checkbox
-                              onChange={appState.handleDataSel}
-                              checked={appState.initialState.dataSelValue.numTrips}
-                              name="dataSel"
+                            <Radio
                               value="numTrips"
                             />
                           }
@@ -248,16 +245,13 @@ export default function MainForm (props) {
                         <FormControlLabel
                           label="Population at Home"
                           control={
-                            <Checkbox
-                              name="dataSel"
-                              onChange={appState.handleDataSel}
-                              checked={appState.initialState.dataSelValue.popHome}
+                            <Radio
                               value="popHome"
                             />
                           }
                         />
 
-                      </FormGroup>
+                      </RadioGroup>
                     </FormControl>
                   </Grid>
 

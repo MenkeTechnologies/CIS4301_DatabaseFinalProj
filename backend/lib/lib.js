@@ -36,9 +36,9 @@ function transformReqBody (body) {
       ? body.restrictionVal.toUpperCase()
       : 'ANY',
     dataSelValue: {
-      cases: body.dataSelValue.cases || false,
-      numTrips: body.dataSelValue.numTrips || false,
-      popHome: body.dataSelValue.popHome || false,
+      cases: body.dataSelValue === 'cases',
+      numTrips: body.dataSelValue === 'numTrips',
+      popHome: body.dataSelValue === 'popHome'
     },
   };
 

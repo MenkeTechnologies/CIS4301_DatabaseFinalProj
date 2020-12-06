@@ -61,16 +61,17 @@ export default function App () {
     popHome: false,
 
   };
-  const [dataSelValue, setDataSel] = React.useState(dataSelMap);
+  const [dataSelValue, setDataSel] = React.useState('cases');
 
   const handleDataSel = (event, newValue) => {
 
     const newMap = {
       ...dataSelValue,
     };
+    console.log(`\n_____________'newMap' = '${JSON.stringify(newMap)}'_____________\n`);
 
     newMap[event.target.value] = !newMap[event.target.value];
-    setDataSel(newMap);
+    setDataSel(event.target.value);
   };
 
   const [barData, setBarData] = React.useState({
