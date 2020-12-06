@@ -12,7 +12,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartBar, faChartLine } from '@fortawesome/free-solid-svg-icons';
 import { Form } from 'react-final-form';
-import { H_LEVEL_COMP, visualizePath } from '../util/Utils';
+import { debugJson, H_LEVEL_COMP, visualizePath } from '../util/Utils';
 
 const validate = values => {
   const errors = {};
@@ -80,7 +80,7 @@ const VisualizeMini = (props) => {
                   </Grid>
                 </Grid>
               </Paper>
-              <pre>{JSON.stringify(values, 0, 4)}</pre>
+              {debugJson(values)}
             </form>
           )}
         />

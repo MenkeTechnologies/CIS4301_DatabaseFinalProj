@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+import React from 'react';
 
 export const restrictionType = 'restriction';
 export const stateType = 'state';
@@ -15,7 +16,26 @@ export const H_LEVEL_COMP = 'h6';
 export const svgWidthMini = 500, svgHeightMini = 625;
 export const svgWidthMaxi = 1500, svgHeightMaxi = 1025;
 
+export const DEBUG_GLOBAL = false;
 export const MAXI_ADAPT_WINDOW = true;
+
+export const debugLog = (msg) => {
+
+  if (DEBUG_GLOBAL) {
+    console.log(msg);
+  }
+
+};
+
+export const debugJson = (values) => {
+
+  let json = <div/>;
+  if (DEBUG_GLOBAL) {
+    json = <pre>{JSON.stringify(values, 0, 4)}</pre>;
+  }
+  return json
+
+}
 
 export const createBarChart = (appState, svgHeight, svgWidth, node) => {
 

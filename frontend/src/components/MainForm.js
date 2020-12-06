@@ -21,6 +21,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import ComboBox from './ComboBox';
 import {
+  DEBUG_GLOBAL, debugJson, debugLog,
   getApiURL,
   H_LEVEL,
   H_LEVEL_COMP,
@@ -50,8 +51,7 @@ const validate = values => {
 
     errors.numRecords = 'Required to be integer';
   }
-  // console.log(
-  // `\n_____________'errors' = '${JSON.stringify(errors)}'_____________\n`);
+  debugLog( `\n_____________'errors' = '${JSON.stringify(errors)}'_____________\n`);
   return errors;
 };
 
@@ -66,15 +66,15 @@ export default function MainForm (props) {
       const apiURL = getApiURL({
         numRecords: appState.initialState.numRecords,
       });
-      console.log(
+      debugLog(
         `\n_____________'apiURL' = '${JSON.stringify(apiURL)}'_____________\n`);
       const res = await axios.post(apiURL, values);
       const type = res.data.type;
       const data = res.data.data;
 
-      console.log(
+      debugLog(
         `\n_____________'type' = '${JSON.stringify(type)}'_____________\n`);
-      console.log(
+      debugLog(
         `\n_____________'data' = '${JSON.stringify(data)}'_____________\n`);
       appState.handleBarData(res.data);
 
@@ -289,7 +289,7 @@ export default function MainForm (props) {
                   </Grid>
                 </Grid>
               </Paper>
-              <pre>{JSON.stringify(values, 0, 4)}</pre>
+              {debugJson(values)}
             </form>
           )}
         />
