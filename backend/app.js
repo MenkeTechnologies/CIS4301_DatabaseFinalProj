@@ -14,15 +14,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(helmet());
 
-// -- Begin Database ----
-
-// Need to install the oracle client libraries
-// https://oracle.github.io/node-oracledb/INSTALL.html#instwin
+//{{{                    MARK:DB
+//**************************************************************
 
 const oracledb = require('oracledb');
 const lib = require('./lib/lib');
 const queries = require('./lib/queries');
 
+// Need to install the oracle client libraries
+// https://oracle.github.io/node-oracledb/INSTALL.html
 try {
   oracledb.initOracleClient({ libDir: lib.config.client });
 } catch (err) {
@@ -30,12 +30,11 @@ try {
   console.error(err);
   process.exit(1);
 }
-// -- Begin Routes ----
+//}}}***********************************************************
 
-app.get('/', function (req, res) {
-  res.send('The server is working. Hooray!');
-});
 
+//{{{                    MARK:routes
+//**************************************************************
 app.post('/handle/:weeks/:topRows', function (req, res) {
 
   console.log(lib.REQ_DELIM);
@@ -69,12 +68,18 @@ app.post('/handle/:weeks/:topRows', function (req, res) {
 
 });
 
-// -- End Database ----
+app.get('/', function (req, res) {
+  res.send('The server is working. Hooray!');
+});
+//}}}***********************************************************
 
+
+//{{{                    MARK:app
+//**************************************************************
 const port = process.env.PORT || 8000;
 
 process.on('SIGINT', () => {
-  console.log(`Handle sigint`);
+  console.log(`Death by SIGINT`);
   process.exit(0);
 });
 
@@ -82,3 +87,5 @@ app.listen(port, () => {
   lib.getUsername();
   console.log(`Listening on port: ${port}`);
 });
+//}}}***********************************************************
+

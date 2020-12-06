@@ -1,5 +1,7 @@
 const lib = require('./lib');
 
+//{{{                    MARK:POP HOME QUERIES
+//**************************************************************
 function getPopHomeQueryByState (days, title, order) {
 
   let titleHome = title + '_AT_HOME';
@@ -92,7 +94,10 @@ function getPopHomeQueryAllStates (days, title, order) {
       ORDER BY "${titleHome}" ${order} FETCH FIRST :topRows ROWS ONLY`;
   return selectStatement;
 }
+//}}}***********************************************************
 
+//{{{                    MARK:COVID QUERIES
+//**************************************************************
 function getCovidQueryAllStates (days, title, order) {
   // language=Oracle
   const selectStatement =
@@ -157,7 +162,10 @@ function getCovidQueryByNation (days, title, order) {
      ORDER BY "${title}" ${order} FETCH FIRST :topRows ROWS ONLY`;
   return selectStatement;
 }
+//}}}***********************************************************
 
+//{{{                    MARK:COVID Handler
+//**************************************************************
 function cases (req, res, weeks, topRows) {
   let selectStatement;
   const parsedBody = req.parsedBody;
@@ -181,7 +189,10 @@ function cases (req, res, weeks, topRows) {
 
   return lib.runQuery(req, res, selectStatement, { weeks, topRows });
 }
+//}}}***********************************************************
 
+//{{{                    MARK:Pop Home Handler
+//**************************************************************
 function popHome (req, res, weeks, topRows) {
   const parsedBody = req.parsedBody;
   let selectStatement;
@@ -205,6 +216,7 @@ function popHome (req, res, weeks, topRows) {
 
   return lib.runQuery(req, res, selectStatement, { weeks, topRows });
 }
+//}}}***********************************************************
 
 module.exports = {
   cases,

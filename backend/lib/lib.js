@@ -1,6 +1,7 @@
-// CD 12/5/2020
-//--Query #1
 const oracledb = require('oracledb');
+
+//{{{                    MARK:Vars
+//**************************************************************
 const _secrets = require('./_secrets.json');
 const NUM_ROWS = 5;
 const NUM_WEEKS = 3;
@@ -13,7 +14,10 @@ const config = {
   connectString: _secrets['DB_CONS'],
   client: _secrets['DB_CLIENT_PATH'],
 };
+//}}}***********************************************************
 
+//{{{                    MARK:Fn lib
+//**************************************************************
 function transformReqBody (body) {
   let stateStr;
   if (body.stateVal) {
@@ -56,7 +60,8 @@ function runQuery (req, res, query, parms) {
     logQuery(query, parms);
     let values = Object.values(parms);
     connection.execute(query, values, {
-        outFormat: oracledb.OBJECT, // Return the result as Object
+      // Return the result as Object
+      outFormat: oracledb.OBJECT,
       }, function (err, result) {
         if (err) {
           console.log(
@@ -87,14 +92,12 @@ function runQuery (req, res, query, parms) {
 }
 
 function handleDatabaseOperation (request, response, callback) {
-  //var connectString = process.env.DBAAS_DEFAULT_CONNECT_DESCRIPTOR.replace("PDB1", "demos");
-  //console.log('ConnectString :' + connectString);
   console.log('executing query...');
   oracledb.getConnection(config,
     function (err, connection) {
       if (err) {
         console.log('Error in acquiring connection ...');
-        console.log('Error message ' + err.message);
+        console.log('Error message', err.message);
 
         // Error connecting to DB
         response.writeHead(500, { 'Content-Type': 'application/json' });
@@ -110,7 +113,7 @@ function handleDatabaseOperation (request, response, callback) {
       console.log('Connection acquired ; go execute ');
       callback(request, response, connection);
     });
-}//handleDatabaseOperation
+}
 
 function doRelease (connection) {
   connection.release(
@@ -121,11 +124,6 @@ function doRelease (connection) {
     });
 }
 
-// end of CD 12/5/2020
-
-// -- End Routes ----
-
-// test database connection
 async function getUsername () {
   let conn;
 
@@ -146,6 +144,8 @@ async function getUsername () {
     }
   }
 }
+
+//}}}***********************************************************
 
 module.exports = {
   runQuery,
