@@ -59,6 +59,6 @@ const states = {
   'WV': 'West Virginia',
   'WI': 'Wisconsin',
   'WY': 'Wyoming',
-}
+};
 
-export default states
+export default states;

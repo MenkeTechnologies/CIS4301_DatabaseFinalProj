@@ -1,23 +1,23 @@
 /* eslint-disable no-use-before-define */
-import React from 'react'
-import TextField from '@material-ui/core/TextField'
-import Autocomplete from '@material-ui/lab/Autocomplete'
-import { regionType, stateType } from '../util/Utils'
+import React from 'react';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import { regionType, stateType } from '../util/Utils';
 
-import usaStates from '../data/states.js'
-import restrictions from '../data/restriction'
-import regionNames from '../data/regions'
+import usaStates from '../data/states.js';
+import restrictions from '../data/restriction';
+import regionNames from '../data/regions';
 
 export default function ComboBox (props) {
 
-  let opts
+  let opts;
 
   if (props.type === stateType) {
-    opts = Object.keys(usaStates)
+    opts = Object.keys(usaStates);
   } else if (props.type === regionType) {
-    opts = regionNames
+    opts = regionNames;
   } else {
-    opts = restrictions
+    opts = restrictions;
   }
 
   return (
@@ -31,5 +31,5 @@ export default function ComboBox (props) {
 
                                           variant="outlined"/>}
     />
-  )
+  );
 }

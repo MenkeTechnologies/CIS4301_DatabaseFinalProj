@@ -1,8 +1,8 @@
-import React from 'react'
-import { Form } from 'react-final-form'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React from 'react';
+import { Form } from 'react-final-form';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import Checkbox from '@material-ui/core/Checkbox'
+import Checkbox from '@material-ui/core/Checkbox';
 
 import {
   Button,
@@ -14,55 +14,55 @@ import {
   Grid,
   Paper,
   Typography,
-} from '@material-ui/core'
+} from '@material-ui/core';
 // Picker
-import Tabs from '@material-ui/core/Tabs'
-import Tab from '@material-ui/core/Tab'
-import ComboBox from './ComboBox'
-import { API_URL, regionType, restrictionType, stateType } from '../util/Utils'
-import { faPlay, faSearch } from '@fortawesome/free-solid-svg-icons'
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import ComboBox from './ComboBox';
+import { API_URL, regionType, restrictionType, stateType } from '../util/Utils';
+import { faPlay, faSearch } from '@fortawesome/free-solid-svg-icons';
 
-import axios from 'axios'
+import axios from 'axios';
 
 const onSubmit = async values => {
 
   axios({
     method: 'post',
     url: API_URL,
-    data: values
+    data: values,
   })
-  .then(function (response) {
-    console.log(`\n_____________'response' = '${JSON.stringify(response)}'_____________\n`);
-  }).catch((err) => {
-    
-    console.log(`\n_____________'err' = '${JSON.stringify(err)}'_____________\n`);
-      
-    
-  })
+    .then(function (response) {
+      console.log(`\n_____________'response' = '${JSON.stringify(
+        response)}'_____________\n`);
+    }).catch((err) => {
 
+    console.log(
+      `\n_____________'err' = '${JSON.stringify(err)}'_____________\n`);
 
-}
+  });
+
+};
 
 const validate = values => {
-  const errors = {}
+  const errors = {};
   if (!values.firstName) {
-    errors.firstName = 'Required'
+    errors.firstName = 'Required';
   }
   if (!values.lastName) {
-    errors.lastName = 'Required'
+    errors.lastName = 'Required';
   }
   if (!values.email) {
-    errors.email = 'Required'
+    errors.email = 'Required';
   }
-  return errors
-}
+  return errors;
+};
 
 export default function MainForm (props) {
 
-  const appState = props.state
+  const appState = props.state;
 
   console.log(
-    `\n_____________'appState' = '${JSON.stringify(appState)}'_____________\n`)
+    `\n_____________'appState' = '${JSON.stringify(appState)}'_____________\n`);
 
   return (
     <div>
@@ -237,6 +237,6 @@ export default function MainForm (props) {
       </div>
 
     </div>
-  )
+  );
 }
 

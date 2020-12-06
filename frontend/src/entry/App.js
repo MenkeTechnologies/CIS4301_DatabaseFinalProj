@@ -1,70 +1,70 @@
-import '../css/App.css'
-import { Nav, Navbar } from 'react-bootstrap'
-import { Redirect, Route, Switch, useHistory } from 'react-router-dom'
-import { LinkContainer } from 'react-router-bootstrap'
-import Dashboard from '../components/Dashboard'
-import Visualize from '../components/Visualize'
-import React from 'react'
-import { ANY, dashboardPath } from '../util/Utils'
+import '../css/App.css';
+import { Nav, Navbar } from 'react-bootstrap';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
+import Dashboard from '../components/Dashboard';
+import Visualize from '../components/Visualize';
+import React from 'react';
+import { ANY, dashboardPath } from '../util/Utils';
 
-import { createMuiTheme, useTheme } from '@material-ui/core/styles'
-import { MuiThemeProvider, Paper } from '@material-ui/core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlane } from '@fortawesome/free-solid-svg-icons'
+import { createMuiTheme, useTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider, Paper } from '@material-ui/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlane } from '@fortawesome/free-solid-svg-icons';
 
 export default function App () {
 
-  const [periodVal, setPeriodVal] = React.useState('7')
+  const [periodVal, setPeriodVal] = React.useState('7');
 
   const handlePeriod = (event, newValue) => {
-    setPeriodVal(newValue)
-  }
-  const [orderVal, setOrder] = React.useState('asc')
+    setPeriodVal(newValue);
+  };
+  const [orderVal, setOrder] = React.useState('asc');
 
   const handleOrder = (event, newValue) => {
-    setOrder(newValue)
-  }
-  const [scopeVal, setScope] = React.useState('state')
+    setOrder(newValue);
+  };
+  const [scopeVal, setScope] = React.useState('state');
 
   const handleScope = (event, newValue) => {
-    setScope(newValue)
-  }
+    setScope(newValue);
+  };
 
-  const [restrictionVal, setRestriction] = React.useState(ANY)
+  const [restrictionVal, setRestriction] = React.useState(ANY);
 
   const handleRestrictionCombo = (event, newValue) => {
-    setRestriction(newValue)
-  }
+    setRestriction(newValue);
+  };
 
-  const [stateVal, setState] = React.useState(ANY)
+  const [stateVal, setState] = React.useState(ANY);
 
   const handleStateCombo = (event, newValue) => {
-    setState(newValue)
-  }
+    setState(newValue);
+  };
 
-  const [regionVal, setRegion] = React.useState(ANY)
+  const [regionVal, setRegion] = React.useState(ANY);
 
   const handleRegionCombo = (event, newValue) => {
-    setRegion(newValue)
-  }
+    setRegion(newValue);
+  };
 
   let dataSelMap = {
     cases: true,
     numTrips: false,
     popHome: false,
 
-  }
-  const [dataSelValue, setDataSel] = React.useState(dataSelMap)
+  };
+  const [dataSelValue, setDataSel] = React.useState(dataSelMap);
 
   const handleDataSel = (event, newValue) => {
 
     const newMap = {
       ...dataSelValue,
-    }
+    };
 
-    newMap[event.target.value] = !newMap[event.target.value]
-    setDataSel(newMap)
-  }
+    newMap[event.target.value] = !newMap[event.target.value];
+    setDataSel(newMap);
+  };
 
   const initialState = {
     periodVal,
@@ -74,7 +74,7 @@ export default function App () {
     regionVal,
     restrictionVal,
     dataSelValue,
-  }
+  };
 
   const appState = {
     initialState,
@@ -85,9 +85,9 @@ export default function App () {
     handleStateCombo,
     handleRegionCombo,
     handleDataSel,
-  }
+  };
 
-  const currentTheme = useTheme()
+  const currentTheme = useTheme();
 
   const theme = createMuiTheme({
     overrides: {
@@ -101,13 +101,13 @@ export default function App () {
       },
     },
 
-  })
+  });
 
-  const history = useHistory()
+  const history = useHistory();
 
   const navHome = () => {
-    history.push(dashboardPath)
-  }
+    history.push(dashboardPath);
+  };
 
   return (
     <div>
@@ -151,5 +151,5 @@ export default function App () {
 
     </div>
 
-  )
+  );
 }

@@ -1,14 +1,9 @@
-import React, { Component } from 'react'
-import MainForm from './MainForm'
-import VisualizeMini from './VisualizeMini'
-import { Grid, Typography } from '@material-ui/core'
+import React, { Component } from 'react';
+import MainForm from './MainForm';
+import VisualizeMini from './VisualizeMini';
+import { Grid, Typography } from '@material-ui/core';
 
 class Dashboard extends Component {
-
-  constructor (props) {
-    super(props)
-
-  }
 
   componentDidMount () {
 
@@ -35,8 +30,8 @@ class Dashboard extends Component {
 
 
       </div>
-    )
+    );
   }
 }
 
-export default Dashboard
+export default Dashboard;

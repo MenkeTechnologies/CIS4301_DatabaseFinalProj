@@ -38,6 +38,6 @@ const restrictions = [
   'Stop Initiation Of Evictions Overall Or Due To Covid Related Issues',
   'Suspended Elective Medical Dental Procedures',
   'Wholesale Trade',
-]
+];
 
-export default restrictions
+export default restrictions;

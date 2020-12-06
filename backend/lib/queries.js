@@ -1,8 +1,9 @@
-const lib = require('./lib')
+const lib = require('./lib');
+
 function getPopHomeQueryByState (days, title, order) {
 
-  let titleHome = title + '_AT_HOME'
-  let titleNotHome = title + '_NOT_HOME'
+  let titleHome = title + '_AT_HOME';
+  let titleNotHome = title + '_NOT_HOME';
 
   // language=Oracle
   const selectStatement =
@@ -26,14 +27,14 @@ function getPopHomeQueryByState (days, title, order) {
                          FROM TRIPS_BY_DISTANCE)
           )
      GROUP BY STATE_POSTAL_CODE
-     ORDER BY "${titleHome}" ${order} FETCH FIRST :topRows ROWS ONLY`
-  return selectStatement
+     ORDER BY "${titleHome}" ${order} FETCH FIRST :topRows ROWS ONLY`;
+  return selectStatement;
 }
 
 function getPopHomeQueryByNation (days, title, order) {
 
-  let titleHome = title + '_AT_HOME'
-  let titleNotHome = title + '_NOT_HOME'
+  let titleHome = title + '_AT_HOME';
+  let titleNotHome = title + '_NOT_HOME';
 
   // language=Oracle
   const selectStatement =
@@ -57,14 +58,14 @@ function getPopHomeQueryByNation (days, title, order) {
                          FROM TRIPS_BY_DISTANCE)
           )
      GROUP BY STATE_POSTAL_CODE
-     ORDER BY "${titleHome}" ${order} FETCH FIRST :topRows ROWS ONLY`
-  return selectStatement
+     ORDER BY "${titleHome}" ${order} FETCH FIRST :topRows ROWS ONLY`;
+  return selectStatement;
 }
 
 function getPopHomeQueryAllStates (days, title, order) {
 
-  let titleHome = title + '_AT_HOME'
-  let titleNotHome = title + '_NOT_HOME'
+  let titleHome = title + '_AT_HOME';
+  let titleNotHome = title + '_NOT_HOME';
 
   // language=Oracle
   const selectStatement =
@@ -88,8 +89,8 @@ function getPopHomeQueryAllStates (days, title, order) {
                           FROM TRIPS_BY_DISTANCE)
            )
       GROUP BY STATE_POSTAL_CODE
-      ORDER BY "${titleHome}" ${order} FETCH FIRST :topRows ROWS ONLY`
-  return selectStatement
+      ORDER BY "${titleHome}" ${order} FETCH FIRST :topRows ROWS ONLY`;
+  return selectStatement;
 }
 
 function getCovidQueryAllStates (days, title, order) {
@@ -109,8 +110,8 @@ function getCovidQueryAllStates (days, title, order) {
                          FROM COVID_19_CASES)
           )
      GROUP BY STATE
-     ORDER BY "${title}" ${order} FETCH FIRST :topRows ROWS ONLY`
-  return selectStatement
+     ORDER BY "${title}" ${order} FETCH FIRST :topRows ROWS ONLY`;
+  return selectStatement;
 }
 
 function getCovidQueryByState (days, title, order, states) {
@@ -132,8 +133,8 @@ function getCovidQueryByState (days, title, order, states) {
           )
      GROUP BY STATE
      having STATE in (${states})
-     ORDER BY "${title}" ${order} FETCH FIRST :topRows ROWS ONLY`
-  return selectStatement
+     ORDER BY "${title}" ${order} FETCH FIRST :topRows ROWS ONLY`;
+  return selectStatement;
 }
 
 function getCovidQueryByNation (days, title, order) {
@@ -153,59 +154,59 @@ function getCovidQueryByNation (days, title, order) {
                         (SELECT MAX(SUBMISSION_DATE)
                          FROM COVID_19_CASES)
           )
-     ORDER BY "${title}" ${order} FETCH FIRST :topRows ROWS ONLY`
-  return selectStatement
+     ORDER BY "${title}" ${order} FETCH FIRST :topRows ROWS ONLY`;
+  return selectStatement;
 }
 
 function cases (req, res, weeks, topRows) {
-  let selectStatement
+  let selectStatement;
   const parsedBody = req.parsedBody;
 
   if (parsedBody.scopeVal === 'NATION') {
 
     selectStatement = getCovidQueryByNation(parsedBody.periodVal,
-      parsedBody.periodVal + '_DAY_MAX_MOVING_AVERAGE', parsedBody.orderVal)
-    return lib.runQuery(req, res, selectStatement, { weeks, topRows })
+      parsedBody.periodVal + '_DAY_MAX_MOVING_AVERAGE', parsedBody.orderVal);
+    return lib.runQuery(req, res, selectStatement, { weeks, topRows });
   }
 
   if (parsedBody.stateVal === '\'ANY\'') {
 
     selectStatement = getCovidQueryAllStates(parsedBody.periodVal,
-      parsedBody.periodVal + '_DAY_MAX_MOVING_AVERAGE', parsedBody.orderVal)
+      parsedBody.periodVal + '_DAY_MAX_MOVING_AVERAGE', parsedBody.orderVal);
   } else {
     selectStatement = getCovidQueryByState(parsedBody.periodVal,
       parsedBody.periodVal + '_DAY_MAX_MOVING_AVERAGE', parsedBody.orderVal,
-      parsedBody.stateVal)
+      parsedBody.stateVal);
   }
 
-  return lib.runQuery(req, res, selectStatement, { weeks, topRows })
+  return lib.runQuery(req, res, selectStatement, { weeks, topRows });
 }
 
 function popHome (req, res, weeks, topRows) {
   const parsedBody = req.parsedBody;
-  let selectStatement
+  let selectStatement;
 
   if (parsedBody.scopeVal === 'NATION') {
 
     selectStatement = getPopHomeQueryByNation(parsedBody.periodVal,
-      parsedBody.periodVal + '_DAY_MAX_MOVING_AVERAGE', parsedBody.orderVal)
-    return lib.runQuery(req, res, selectStatement, { weeks, topRows })
+      parsedBody.periodVal + '_DAY_MAX_MOVING_AVERAGE', parsedBody.orderVal);
+    return lib.runQuery(req, res, selectStatement, { weeks, topRows });
   }
 
   if (parsedBody.stateVal === '\'ANY\'') {
 
     selectStatement = getPopHomeQueryAllStates(parsedBody.periodVal,
-      parsedBody.periodVal + '_DAY_MAX_MOVING_AVERAGE', parsedBody.orderVal)
+      parsedBody.periodVal + '_DAY_MAX_MOVING_AVERAGE', parsedBody.orderVal);
   } else {
     selectStatement = getPopHomeQueryByState(parsedBody.periodVal,
       parsedBody.periodVal + '_DAY_MAX_MOVING_AVERAGE', parsedBody.orderVal,
-      parsedBody.stateVal)
+      parsedBody.stateVal);
   }
 
-  return lib.runQuery(req, res, selectStatement, { weeks, topRows })
+  return lib.runQuery(req, res, selectStatement, { weeks, topRows });
 }
 
 module.exports = {
   cases,
-  popHome
-}
+  popHome,
+};

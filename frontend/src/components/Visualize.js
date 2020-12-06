@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import BarChart from './BarChart'
+import React, { Component } from 'react';
+import BarChart from './BarChart';
 
 class Visualize extends Component {
   render () {
@@ -10,8 +10,8 @@ class Visualize extends Component {
         <BarChart data={[5, 10, 1, 3]} size={[500, 500]}/>
 
       </div>
-    )
+    );
   }
 }
 
-export default Visualize
+export default Visualize;

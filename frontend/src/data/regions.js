@@ -5,6 +5,6 @@ const regionNames = [
   'Southwest',
   'Northeast',
   'Midwest',
-]
+];
 
-export default regionNames
+export default regionNames;

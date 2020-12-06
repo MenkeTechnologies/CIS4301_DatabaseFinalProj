@@ -1,6 +1,6 @@
-import React from 'react'
-import BarChart from './BarChart'
-import { useHistory } from 'react-router-dom'
+import React from 'react';
+import BarChart from './BarChart';
+import { useHistory } from 'react-router-dom';
 
 import {
   Button,
@@ -8,33 +8,33 @@ import {
   Grid,
   Paper,
   Typography,
-} from '@material-ui/core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChartBar, faChartLine } from '@fortawesome/free-solid-svg-icons'
-import { Form } from 'react-final-form'
+} from '@material-ui/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChartBar, faChartLine } from '@fortawesome/free-solid-svg-icons';
+import { Form } from 'react-final-form';
 
 const validate = values => {
-  const errors = {}
+  const errors = {};
   if (!values.firstName) {
-    errors.firstName = 'Required'
+    errors.firstName = 'Required';
   }
   if (!values.lastName) {
-    errors.lastName = 'Required'
+    errors.lastName = 'Required';
   }
   if (!values.email) {
-    errors.email = 'Required'
+    errors.email = 'Required';
   }
-  return errors
-}
+  return errors;
+};
 const VisualizeMini = (props) => {
 
-  const appState = props.state
+  const appState = props.state;
 
-  const history = useHistory()
+  const history = useHistory();
 
   const onSubmit = e => {
-    history.push('/query')
-  }
+    history.push('/query');
+  };
 
   return (
     <div>
@@ -85,7 +85,7 @@ const VisualizeMini = (props) => {
       </div>
 
     </div>
-  )
-}
+  );
+};
 
-export default VisualizeMini
+export default VisualizeMini;
