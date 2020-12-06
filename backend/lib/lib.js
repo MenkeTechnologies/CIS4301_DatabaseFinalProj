@@ -26,7 +26,7 @@ function transformReqBody (body) {
     stateStr = `'ANY'`;
   }
 
-  const defaultObj = {
+  const parsedObj = {
     periodVal: body.periodVal || '7',
     orderVal: body.orderVal ? body.orderVal.toUpperCase() : 'ASC',
     scopeVal: body.scopeVal ? body.scopeVal.toUpperCase() : 'STATE',
@@ -42,14 +42,14 @@ function transformReqBody (body) {
     },
   };
 
-  return defaultObj;
+  return parsedObj;
 }
 
 function logQuery (query, parms) {
   console.log(QUERY_DELIM);
   console.log(query);
   let values = Object.values(parms);
-  console.log('params = ' + values);
+  console.log('params =', values);
   console.log(QUERY_DELIM);
 }
 
@@ -92,7 +92,7 @@ function runQuery (req, res, query, parms) {
 }
 
 function handleDatabaseOperation (request, response, callback) {
-  console.log('executing query...');
+  console.log('executing query, please wait ...');
   oracledb.getConnection(config,
     function (err, connection) {
       if (err) {
