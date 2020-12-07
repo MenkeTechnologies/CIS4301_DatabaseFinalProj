@@ -177,7 +177,7 @@ export const getApiURL = (data) => {
 
   if (data) {
 
-    const weeks = data.numWeeks || NUM_WEEKS;
+    const weeks = data.weeksAgo || NUM_WEEKS;
     const row = data.numRecords || NUM_ROWS;
 
     return `http://localhost:8000/handle/${weeks}/${row}`;

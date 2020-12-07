@@ -69,8 +69,9 @@ export default function MainForm (props) {
   const onSubmit = async (values, origin) => {
 
     try {
-      const apiURL = getApiURL({
-        numRecords: appState.initialState.numRecords,
+      const apiURL = getApiURL({   
+        weeksAgo: appState.initialState.weeksAgo,     
+        numRecords: appState.initialState.numRecords,       
       });
       debugLog(
         `\n_____________'apiURL' = '${JSON.stringify(apiURL)}'_____________\n`);
@@ -219,6 +220,16 @@ export default function MainForm (props) {
                                value={appState.initialState.numRecords}/>
 
                   </Grid>
+                  <Grid item xs={12}>
+                    <Typography variant={H_LEVEL} align="left" component="h3"
+                                gutterBottom>
+                      Weeks Ago
+                    </Typography>
+                    <TextField label="Weeks Ago" variant="outlined"
+                               onChange={appState.handleWeeksAgo}
+                               value={appState.initialState.weeksAgo}/>
+
+                  </Grid>                  
                   <Grid item>
                     <FormControl component="fieldset">
                       <FormLabel component="legend">Data Selector</FormLabel>

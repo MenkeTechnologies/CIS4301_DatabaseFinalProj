@@ -104,12 +104,12 @@ function getCovidQueryAllStates (days, title, order) {
     `SELECT STATE, MAX("${title}") AS "${title}"
      FROM (
               SELECT STATE,
-                     AVG(TOT_CASES) OVER (
+                     AVG(NEW_CASE) OVER (
                          PARTITION BY STATE
                          ORDER BY SUBMISSION_DATE
-                         ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) AS "${title}"
+                         ROWS BETWEEN (${days} - 1) PRECEDING AND CURRENT ROW) AS "${title}"
               FROM COVID_19_CASES
-              WHERE SUBMISSION_DATE BETWEEN (SELECT MAX(SUBMISSION_DATE) + (:weeks * -${days})
+              WHERE SUBMISSION_DATE BETWEEN (SELECT MAX(SUBMISSION_DATE) + (:weeks * -7)
                                              FROM COVID_19_CASES) AND
                         (SELECT MAX(SUBMISSION_DATE)
                          FROM COVID_19_CASES)
@@ -126,12 +126,12 @@ function getCovidQueryByState (days, title, order, states) {
     `SELECT STATE, MAX("${title}") AS "${title}"
      FROM (
               SELECT STATE,
-                     AVG(TOT_CASES) OVER (
+                     AVG(NEW_CASE) OVER (
                          PARTITION BY STATE
                          ORDER BY SUBMISSION_DATE
-                         ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) AS "${title}"
+                         ROWS BETWEEN (${days} - 1) PRECEDING AND CURRENT ROW) AS "${title}"
               FROM COVID_19_CASES
-              WHERE SUBMISSION_DATE BETWEEN (SELECT MAX(SUBMISSION_DATE) + (:weeks * -${days})
+              WHERE SUBMISSION_DATE BETWEEN (SELECT MAX(SUBMISSION_DATE) + (:weeks * -7)
                                              FROM COVID_19_CASES) AND
                         (SELECT MAX(SUBMISSION_DATE)
                          FROM COVID_19_CASES)
@@ -149,12 +149,12 @@ function getCovidQueryByNation (days, title, order) {
     `SELECT 'US' as STATE, MAX("${title}") AS "${title}"
      FROM (
               SELECT STATE,
-                     AVG(TOT_CASES) OVER (
+                     AVG(NEW_CASE) OVER (
                          PARTITION BY STATE
                          ORDER BY SUBMISSION_DATE
-                         ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) AS "${title}"
+                         ROWS BETWEEN (${days} - 1) PRECEDING AND CURRENT ROW) AS "${title}"
               FROM COVID_19_CASES
-              WHERE SUBMISSION_DATE BETWEEN (SELECT MAX(SUBMISSION_DATE) + (:weeks * -${days})
+              WHERE SUBMISSION_DATE BETWEEN (SELECT MAX(SUBMISSION_DATE) + (:weeks * -7)
                                              FROM COVID_19_CASES) AND
                         (SELECT MAX(SUBMISSION_DATE)
                          FROM COVID_19_CASES)

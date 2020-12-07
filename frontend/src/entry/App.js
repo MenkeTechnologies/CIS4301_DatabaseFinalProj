@@ -37,6 +37,15 @@ export default function App () {
 
   };
 
+  const [weeksAgo, setWeeksAgo] = React.useState(3);
+
+  const handleWeeksAgo = (event, newValue) => {
+    const val = event.target.value;
+    setWeeksAgo(val);
+
+  };
+ 
+
   const [restrictionVal, setRestriction] = React.useState(ANY);
 
   const handleRestrictionCombo = (event, newValue) => {
@@ -97,6 +106,7 @@ export default function App () {
     dataSelValue,
     barData,
     numRecords,
+    weeksAgo,    
   };
 
   const appState = {
@@ -110,6 +120,7 @@ export default function App () {
     handleDataSel,
     handleBarData,
     handleNumRecords,
+    handleWeeksAgo,    
   };
 
   const currentTheme = useTheme();
