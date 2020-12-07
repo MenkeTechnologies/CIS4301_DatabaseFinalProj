@@ -244,14 +244,14 @@ export default function MainForm (props) {
                             />
                           }
                         />
-                        <FormControlLabel
-                          label="Number of Trips"
-                          control={
-                            <Radio
-                              value="numTrips"
-                            />
-                          }
-                        />
+                        {/*<FormControlLabel*/}
+                        {/*  label="Number of Trips"*/}
+                        {/*  control={*/}
+                        {/*    <Radio*/}
+                        {/*      value="numTrips"*/}
+                        {/*    />*/}
+                        {/*  }*/}
+                        {/*/>*/}
                         <FormControlLabel
                           label="Population at Home"
                           control={
