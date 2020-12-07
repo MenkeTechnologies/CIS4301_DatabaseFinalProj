@@ -2,7 +2,7 @@ const lib = require('./lib');
 
 //{{{                    MARK:POP HOME QUERIES
 //**************************************************************
-function getPopHomeQueryByState (days, title, order) {
+function getPopHomeQueryByState (days, title, order, states) {
 
   let titleHome = title + '_AT_HOME';
   let titleNotHome = title + '_NOT_HOME';
@@ -17,18 +17,19 @@ function getPopHomeQueryByState (days, title, order) {
                      AVG(POP_STAY_HOME) OVER (
                          PARTITION BY STATE_POSTAL_CODE
                          ORDER BY DATE_ENTERED
-                         ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) AS "${titleHome}",
+                         ROWS BETWEEN (${days} - 1) PRECEDING AND CURRENT ROW) AS "${titleHome}",
                      AVG(POP_NOT_STAY_HOME) OVER (
                          PARTITION BY STATE_POSTAL_CODE
                          ORDER BY DATE_ENTERED
-                         ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) AS "${titleNotHome}"
+                         ROWS BETWEEN (${days} - 1) PRECEDING AND CURRENT ROW) AS "${titleNotHome}"
               FROM TRIPS_BY_DISTANCE
-              WHERE DATE_ENTERED BETWEEN (SELECT MAX(DATE_ENTERED) + (:weeks * -${days})
+              WHERE DATE_ENTERED BETWEEN (SELECT MAX(DATE_ENTERED) + (:weeks * -7)
                                           FROM TRIPS_BY_DISTANCE) AND
                         (SELECT MAX(DATE_ENTERED)
                          FROM TRIPS_BY_DISTANCE)
           )
      GROUP BY STATE_POSTAL_CODE
+     having STATE_POSTAL_CODE in (${states})
      ORDER BY "${titleHome}" ${order} FETCH FIRST :topRows ROWS ONLY`;
   return selectStatement;
 }
@@ -48,13 +49,13 @@ function getPopHomeQueryByNation (days, title, order) {
                      AVG(POP_STAY_HOME) OVER (
                          PARTITION BY STATE_POSTAL_CODE
                          ORDER BY DATE_ENTERED
-                         ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) AS "${titleHome}",
+                         ROWS BETWEEN (${days} - 1) PRECEDING AND CURRENT ROW) AS "${titleHome}",
                      AVG(POP_NOT_STAY_HOME) OVER (
                          PARTITION BY STATE_POSTAL_CODE
                          ORDER BY DATE_ENTERED
-                         ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) AS "${titleNotHome}"
+                         ROWS BETWEEN (${days} - 1) PRECEDING AND CURRENT ROW) AS "${titleNotHome}"
               FROM TRIPS_BY_DISTANCE
-              WHERE DATE_ENTERED BETWEEN (SELECT MAX(DATE_ENTERED) + (:weeks * -${days})
+              WHERE DATE_ENTERED BETWEEN (SELECT MAX(DATE_ENTERED) + (:weeks * -7)
                                           FROM TRIPS_BY_DISTANCE) AND
                         (SELECT MAX(DATE_ENTERED)
                          FROM TRIPS_BY_DISTANCE)
@@ -79,13 +80,13 @@ function getPopHomeQueryAllStates (days, title, order) {
                       AVG(POP_STAY_HOME) OVER (
                           PARTITION BY STATE_POSTAL_CODE
                           ORDER BY DATE_ENTERED
-                          ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) AS "${titleHome}",
+                          ROWS BETWEEN (${days} - 1) PRECEDING AND CURRENT ROW) AS "${titleHome}",
                       AVG(POP_NOT_STAY_HOME) OVER (
                           PARTITION BY STATE_POSTAL_CODE
                           ORDER BY DATE_ENTERED
-                          ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) AS "${titleNotHome}"
+                          ROWS BETWEEN (${days} - 1) PRECEDING AND CURRENT ROW) AS "${titleNotHome}"
                FROM TRIPS_BY_DISTANCE
-               WHERE DATE_ENTERED BETWEEN (SELECT MAX(DATE_ENTERED) + (:weeks * -${days})
+               WHERE DATE_ENTERED BETWEEN (SELECT MAX(DATE_ENTERED) + (:weeks * -7)
                                            FROM TRIPS_BY_DISTANCE) AND
                          (SELECT MAX(DATE_ENTERED)
                           FROM TRIPS_BY_DISTANCE)
