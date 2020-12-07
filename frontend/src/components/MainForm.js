@@ -2,17 +2,16 @@ import React from 'react';
 import { Form } from 'react-final-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import Checkbox from '@material-ui/core/Checkbox';
-
 import {
   Button,
   CssBaseline,
   FormControl,
   FormControlLabel,
-  FormGroup,
   FormLabel,
   Grid,
-  Paper, Radio, RadioGroup,
+  Paper,
+  Radio,
+  RadioGroup,
   TextField,
   Typography,
 } from '@material-ui/core';
@@ -174,8 +173,8 @@ export default function MainForm (props) {
                         onChange={appState.handleOrder}
                         aria-label="disabled tabs example"
                       >
-                        <Tab label="Asc" value={'ASC'}/>
-                        <Tab label="Desc" value={'DESC'}/>
+                        <Tab label="Ascending" value={'ASC'}/>
+                        <Tab label="Descending" value={'DESC'}/>
                       </Tabs>
                     </Paper>
                   </Grid>
@@ -234,7 +233,7 @@ export default function MainForm (props) {
                     <FormControl component="fieldset">
                       <FormLabel component="legend">Data Selector</FormLabel>
                       <RadioGroup row name="dataSel"
-                        onChange={appState.handleDataSel}
+                                  onChange={appState.handleDataSel}
                                   value={appState.initialState.dataSelValue}
                       >
                         <FormControlLabel
